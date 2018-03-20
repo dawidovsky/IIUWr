@@ -60,16 +60,14 @@
 (define con (conj 'a 'b))
 
 (define (free-vars form)
-  (define (helper lis res)
-    (cond ((null? res) lis)
-          ((var? res) (append lis res))
-          ((neg? res) (helper lis (neg-subf res)))
-          (else (list (helper lis (cadr res)) (helper lis (caddr res))))))
-  (helper '() form))
+  (define (helper res lis)
+    (cond [(neg? res) (helper (neg-subf res) lis)]
+          [(disj? res) (helper (disj-rght res)
+                                (helper (disj-left res) lis))]
+          [(conj? res) (helper (conj-rght res)
+                                (helper (conj-left res) lis))]
+          [else (remove-duplicates (append lis (list res)))]))
+  (helper form '()))
 
 (free-vars formula)
-(free-vars con)
-
-               
-               
-            
+(free-vars con)      
