@@ -7,7 +7,7 @@ int main()
   tab_bit u(45ull);      // tablica 64-bitowa (sizeof(uint64_t)*8)
   tab_bit w({1, 0, 1, 1, 0, 0, 0, 1});
   v[0] = 1;              // ustawienie bitu 0-go bitu na 1
-  // t[45] = true;          // ustawienie bitu 45-go bitu na 1
+  // t[45] = true;         // ustawienie bitu 45-go bitu na 1
   bool b = w[2];         // odczytanie bitu 1-go
   // u[63] = 1;
   // u[45] = u[46] = u[63]; // przepisanie bitu 63-go do bitow 45-go i 46-go
