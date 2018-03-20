@@ -1,0 +1,30 @@
+Dane do programu wprowadzamy poprzez zmianê kodu w pliku zadanie1.c.
+Pod zmienn¹ size podajemy liczbê figur.
+Nazwa 'figury' stosowana w instrukcja jest nazw¹ tablicy przechowuj¹c¹
+figury. Jest sta³a i nie nale¿y jej zmieniaæ chyba ¿e u¿ytkownik zmieni
+ow¹ nazwê tablicy.
+Poszczególne funkcje wykonuj¹ nastêpuj¹ce operacje: 
+
+- createKwadrat(figury[numer_figury],wspó³rzêdna_x,wspó³rzêdna_y,
+  d³ugoœæ_boku) - Tworzy kwadrat, którego lewy dolny róg bêdzie
+  mia³ wspó³rzêdne (wspó³rzêdna_x,wspó³rzêdna_y), a jego boki 
+  bêd¹ o d³ugoœci podanej przy tworzeniu;
+
+- createTrojkat(figury[numer_figury],wspó³rzêdna_x,wspó³rzêdna_y,
+  wektor_x,wektor_y) - Tworzy trójk¹t, którego lewy dolny róg bêdzie
+  mia³ wspó³rzêdne (wspó³rzêdna_x,wspó³rzêdna_y), a jego jeden z boków 
+  bêdzie tworzony wektorem (wektor_x,wektor_y). Od tego boku tworzony
+  jest bok symetryczny i tworzy siê trójk¹t równoramienny;
+
+- createKolo(figury[numer_figury],wspó³rzêdna_x,wspó³rzêdna_y,
+  wektor_x,wektor_y) - Tworzy kolo, którego œrodek bêdzie
+  mia³ wspó³rzêdne (wspó³rzêdna_x,wspó³rzêdna_y), a jego promieñ
+  bêdzie tworzony wektorem (wektor_x,wektor_y);
+
+- pole(figura[numer_figury]) - liczy pole figury;
+
+- przesun(figury[numer_figury],wektor_x,wektor_y) - przesuwa figurê
+  o numerze przez nas wskazanym o zadany wektor;
+
+- sumapol(liczba_figur,figury) - liczy sumê pól figur od numeru 0
+  do numeru podanego przez u¿ytkownika.

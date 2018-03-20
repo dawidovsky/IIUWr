@@ -1,0 +1,35 @@
+providers: [
+  {
+    key: "bt"
+    config:
+      commands: [
+        {
+          project: "C:\\Users\\dawid\\Documents\\UWr\\PO\\Lista1\\Zadanie1"
+          source: "C:\\Users\\dawid\\Documents\\UWr\\PO\\Lista1\\Zadanie1\\.build-tools.cson"
+          name: "Compile"
+          command: "gcc -std=c99 Figury.c Figury.h zadanie1.c -o test"
+          wd: "."
+          env: {}
+          modifier: {}
+          environment:
+            name: "child_process"
+            config:
+              stdoe: "both"
+          stdout:
+            pipeline: []
+          stderr:
+            pipeline: []
+          output:
+            console:
+              close_success: true
+              queue_in_buffer: true
+              colors: false
+              stdin: false
+            linter:
+              no_trace: false
+              immediate: false
+          version: 2
+        }
+      ]
+  }
+]

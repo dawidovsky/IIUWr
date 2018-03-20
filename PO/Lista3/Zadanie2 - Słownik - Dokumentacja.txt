@@ -1,0 +1,46 @@
+Dawid Paluszak - Zadanie 2 Lista 3 - S³ownik
+
+1/ Opis zadania
+
+Zaimplementuj klasê S³ownik<K,V> przechowuj¹c¹ pary elementów, gdzie
+pierwszym elementem pary jest klucz, a drugim wartoœæ.
+Klasa powinna implementowaæ metodê dodawania, wyszukiwania i
+usuwania elementu wskazywanego przez klucz.
+
+2/ Przewodnik po programie
+
+Program jest zbudowany z 3 plików:
+
+- S³ownik_klasa.dll - biblioteka wykorzystywana do kompilacji programu,
+                      która uzyskana jest z pliku S³ownik_klasa.cs;
+- S³ownik_klasa.cs - plik, w którym umieszczona jest struktura programu i
+                     jego metody;
+- S³ownik.cs - plik, który zawiera wy³¹cznie klasê "test" w której
+               umieszczona jest metoda "Main", która s³u¿y jako
+               menu do obs³ugi programu.
+
+Struktura pliku Lista_klasa.cs:
+
+- Klasa S³ownik<K,V> - g³ówna klasa, w której s¹ umieszczone wszystkie metody
+                       ob³uguj¹ce program.
+
+Metody klasy S³ownik<K,V> z pliku S³ownik_klasa.cs:
+
+- Dodaj(K klucz, V wartoœæ) - metoda, która obs³uguje dodawanie elementu
+                              do s³ownika na miejsce 'klucz' o wartoœci
+                              'wartoœæ';
+- Usun(K klucz) - metoda, która obs³uguje usuwanie elementu z miejsca 'klucz';
+- Szukaj(K klucz) - metoda, która obs³uguje wyszukiwanie elementu o kluczu
+                    'klucz' i wyœwietleniu jego wartoœci;
+- Wypisz() - metoda, która wypisuje wszystkie elementy s³ownika;
+
+3/ Informacje o kompilacji, jêzyku i systemie
+
+System operacyjny - Windows 10.
+Jêzyk - C#.
+Kompilator - csc w wersji 4.7.2556.0.
+
+Bibliotekê dll tworzymy u¿ywaj¹c komendy: csc -target:library S³ownik_klasa.cs
+
+Program wykonywalny tworzymy u¿ywaj¹c komendy:
+csc /r:<pe³na_œcie¿ka_do_biblioteki_dll> -out:S³ownik.exe S³ownik.cs

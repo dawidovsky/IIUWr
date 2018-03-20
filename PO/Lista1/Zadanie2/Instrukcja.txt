@@ -1,0 +1,9 @@
+Program uruchamiamy poprzez konsolê wykorzystuj¹c jedn¹ z implementacji (NowyUlamek lub ZmianaUlamka)
+podaj¹c po spacji dwa u³amki w formie 'liczba_ca³kowita/liczba_naturalna'.
+Je¿eli w mianowniku podamy zero to po wybraniu opcji z menu program
+nie wykona operacji i wyœwietli komunikat o dzieleniu przez zero.
+Nastêpnie wyœwietli nam siê ponumerowane menu.
+¯eby siê po nim poruszaæ wpisujemy odpowiedni¹ cyfrê przypisan¹ do 
+elementu menu. ¯eby zmieniæ u³amki uruchamiamy program ponownie.
+
+

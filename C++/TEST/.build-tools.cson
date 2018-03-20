@@ -1,0 +1,62 @@
+providers: [
+  {
+    key: "bt"
+    config:
+      commands: [
+        {
+          project: "C:\\Users\\dawid\\Documents\\UWr\\C++\\TEST"
+          source: "C:\\Users\\dawid\\Documents\\UWr\\C++\\TEST\\.build-tools.cson"
+          name: "make"
+          command: "g++ -std=c++11 test.cpp -o TEST"
+          wd: "."
+          env: {}
+          modifier: {}
+          environment:
+            name: "child_process"
+            config:
+              stdoe: "both"
+          stdout:
+            pipeline: []
+          stderr:
+            pipeline: []
+          output:
+            console:
+              close_success: true
+              queue_in_buffer: true
+              colors: false
+              stdin: false
+            linter:
+              no_trace: false
+              immediate: false
+          version: 2
+        }
+        {
+          project: "C:\\Users\\dawid\\Documents\\UWr\\C++\\TEST"
+          source: "C:\\Users\\dawid\\Documents\\UWr\\C++\\TEST\\.build-tools.cson"
+          name: "bit_test"
+          command: "g++ -std=c++11 bit.cpp -o bittest"
+          wd: "."
+          env: {}
+          modifier: {}
+          environment:
+            name: "child_process"
+            config:
+              stdoe: "both"
+          stdout:
+            pipeline: []
+          stderr:
+            pipeline: []
+          output:
+            console:
+              close_success: true
+              queue_in_buffer: true
+              colors: false
+              stdin: false
+            linter:
+              no_trace: false
+              immediate: false
+          version: 2
+        }
+      ]
+  }
+]

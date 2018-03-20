@@ -1,0 +1,35 @@
+providers: [
+  {
+    key: "bt"
+    config:
+      commands: [
+        {
+          project: "C:\\Users\\dawid\\Documents\\UWr\\C++\\Zadanie3"
+          source: "C:\\Users\\dawid\\Documents\\UWr\\C++\\Zadanie3\\.build-tools.cson"
+          name: "make "
+          command: "g++ -std=c++11 stos.cpp stos.hpp main.cpp -o Stos"
+          wd: "."
+          env: {}
+          modifier: {}
+          environment:
+            name: "child_process"
+            config:
+              stdoe: "both"
+          stdout:
+            pipeline: []
+          stderr:
+            pipeline: []
+          output:
+            console:
+              close_success: true
+              queue_in_buffer: true
+              colors: false
+              stdin: false
+            linter:
+              no_trace: false
+              immediate: false
+          version: 2
+        }
+      ]
+  }
+]

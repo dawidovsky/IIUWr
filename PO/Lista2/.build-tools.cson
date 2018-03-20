@@ -1,0 +1,62 @@
+providers: [
+  {
+    key: "bt"
+    config:
+      commands: [
+        {
+          project: "C:\\Users\\dawid\\Documents\\UWr\\PO\\Lista2"
+          source: "C:\\Users\\dawid\\Documents\\UWr\\PO\\Lista2\\.build-tools.cson"
+          name: "makefirst"
+          command: "csc Zadanie1.cs"
+          wd: "."
+          env: {}
+          modifier: {}
+          environment:
+            name: "child_process"
+            config:
+              stdoe: "both"
+          stdout:
+            pipeline: []
+          stderr:
+            pipeline: []
+          output:
+            console:
+              close_success: true
+              queue_in_buffer: true
+              colors: false
+              stdin: false
+            linter:
+              no_trace: false
+              immediate: false
+          version: 2
+        }
+        {
+          project: "C:\\Users\\dawid\\Documents\\UWr\\PO\\Lista2"
+          source: "C:\\Users\\dawid\\Documents\\UWr\\PO\\Lista2\\.build-tools.cson"
+          name: "makesecond"
+          command: "csc Zadanie4.cs"
+          wd: "."
+          env: {}
+          modifier: {}
+          environment:
+            name: "child_process"
+            config:
+              stdoe: "both"
+          stdout:
+            pipeline: []
+          stderr:
+            pipeline: []
+          output:
+            console:
+              close_success: true
+              queue_in_buffer: true
+              colors: false
+              stdin: false
+            linter:
+              no_trace: false
+              immediate: false
+          version: 2
+        }
+      ]
+  }
+]

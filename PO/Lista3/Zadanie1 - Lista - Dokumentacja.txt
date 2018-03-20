@@ -1,0 +1,63 @@
+Dawid Paluszak - Zadanie 1 Lista 3 - Lista
+
+1/ Opis zadania
+
+Zaprogramuj klas� Lista<T> implementuj�c� metody dodawania i usuwania
+element�w z pocz�tku i ko�ca listy, oraz  metod� sprawdzania jej niepusto�ci.
+Istotne jest, aby elementy listy nie by�y obiektami klasy Lista,
+lecz elementami innej klasy, kt�rej polami s�: pole zawieraj�ce warto�� typu T,
+oraz odno�niki do innych element�w listy. Przyjmij tak� implementacj�  klasy
+Lista, aby dzia�a�a ona efektywnie zar�wno gdy jest wykorzystywana
+jako kolejka, jak i stos, tj. aby operacje dodawania i usuwania
+element�w na pocz�tek i koniec dzia�a�y w czasie sta�ym.
+Operacja (metoda) usuwania elementu powinna zwraca� jako
+warto�� usuwany element.
+
+2/ Przewodnik po programie
+
+Program jest zbudowany z 3 plik�w:
+
+- Lista_klasa.dll - biblioteka wykorzystywana do kompilacji programu,
+                    kt�ra uzyskana jest z pliku Lista_klasa.cs;
+- Lista_klasa.cs - plik, w kt�rym umieszczona jest struktura programu i
+                   jego metody;
+- Lista.cs - plik, kt�ry zawiera wy��cznie klas� "test" w kt�rej
+             umieszczona jest metoda "Main", kt�ra s�u�y jako
+             menu do obs�ugi programu.
+
+Struktura pliku Lista_klasa.cs:
+
+- Klasa Elem<T> - w zadaniu mamy powiedziane, �e pola i odno�niki klasy
+                  Lista<T> maj� by� przechowywane w oddzielnej klasie. To
+                  jest w�a�nie klasa, kt�ra zajmuje si� tylko tym;
+- Klasa Lista<T> - g��wna klasa, w kt�rej s� umieszczone wszystkie metody
+                   ob�uguj�ce program.
+
+Metody klasy Lista<T> z pliku Lista_klasa.cs:
+
+- DodajPoczatek(T x) - metoda, kt�ra obs�uguje dodawanie elementu 'x' na
+                       pocz�tek listy;
+- DodajKoniec(T x) - metoda, kt�ra obs�uguje dodawanie elementu 'x' na
+                     koniec listy;
+- UsunPoczatek() - metoda, kt�ra obs�uguje usuwanie elementu z pocz�tku
+                   listy. Zwraca usuwany element lub wypisuje komunikat, �e
+                   takowy element nie istnieje;
+- UsunKoniec() - metoda, kt�ra obs�uguje usuwanie elementu z ko�ca
+                 listy. Zwraca usuwany element lub wypisuje komunikat, �e
+                 takowy element nie istnieje;
+- Pusta() - metoda, kt�ra m�wi u�ytkownikowi czy lista zawiera jakie�
+            elementy;
+- Wypisz() - metoda, kt�ra wypisuje wszystkie elementy listy;
+- WP() - metoda, kt�ra wypisuje pierwszy element listy;
+- WO() - metoda, kt�ra wypisuje ostatni element listy.
+
+3/ Informacje o kompilacji, j�zyku i systemie
+
+System operacyjny - Windows 10.
+J�zyk - C#.
+Kompilator - csc w wersji 4.7.2556.0.
+
+Bibliotek� dll tworzymy u�ywaj�c komendy: csc -target:library Lista_klasa.cs
+
+Program wykonywalny tworzymy u�ywaj�c komendy:
+csc /r:<pe�na_�cie�ka_do_biblioteki_dll> -out:Lista.exe Lista.cs
