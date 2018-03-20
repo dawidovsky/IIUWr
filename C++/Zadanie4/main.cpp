@@ -8,10 +8,10 @@ int main()
   tab_bit w({1, 0, 1, 1, 0, 0, 0, 1});
   v[0] = 1;              // ustawienie bitu 0-go bitu na 1
   // t[45] = true;         // ustawienie bitu 45-go bitu na 1
-  bool b = w[2];         // odczytanie bitu 1-go
+  bool b = v[0];         // odczytanie bitu 1-go
   // u[63] = 1;
   // u[45] = u[46] = u[63]; // przepisanie bitu 63-go do bitow 45-go i 46-go
-  cout << "b: w[2]: " << b << endl;
+  cout << "b: v[0]: " << b << endl;
   cout << "u[45]: " << u[45] << " u[46]: " << u[46] << " u[63]: " << u[63] <<endl;
   cout << "t: " << t << endl;
   cout << "v: " << v << endl;
