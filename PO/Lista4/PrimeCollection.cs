@@ -24,7 +24,7 @@ public class Primes : IEnumerator
       return true;
     }
 
-    //konstruktor
+    //konstruktory
     public Primes()
     {
       iter = 1;
