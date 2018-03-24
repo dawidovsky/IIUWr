@@ -17,7 +17,7 @@ public class Primes : IEnumerator
     private bool IsPrime(int n)
     {
       if (n < 2) return false;
-      for (int i = 2; i < n - 1; i++)
+      for (int i = 2; i < n ; i++)
       {
         if (n % i == 0) return false;
       }
@@ -61,6 +61,7 @@ public class Primes : IEnumerator
     }
 }
 
+//Interfejs
 class PrimeCollection : IEnumerable
 {
   private int limit = int.MaxValue;
@@ -70,6 +71,7 @@ class PrimeCollection : IEnumerable
     return new Primes(limit);
   }
 
+//Konstruktor
   public PrimeCollection(int limiter)
   {
     limit = limiter;
@@ -86,8 +88,9 @@ class MainClass
     while(stan)
     {
       obj.Reset();
-      Console.WriteLine("Podaj maksymalna wartosc liczby pierwszej");
-      Console.WriteLine("Zero jesli chcesz opuscic program");
+      Console.WriteLine("");
+      Console.WriteLine("Podaj, do jakiej liczby wypisywac liczby pierwsze");
+      Console.WriteLine("Zero, jesli chcesz opuscic program");
       try
       {
         limit = Int32.Parse(Console.ReadLine());
@@ -95,10 +98,12 @@ class MainClass
       catch(OverflowException)
       {
         Console.WriteLine("Liczba za duza");
+        continue;
       }
       catch(FormatException)
       {
-        Console.WriteLine("Podaj jakies dane");
+        Console.WriteLine("Bledne dane");
+        continue;
       }
       if(limit == 0)
       {
