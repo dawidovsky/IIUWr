@@ -1,6 +1,6 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porównywalna kolekcja
+// L5, z1, Porï¿½wnywalna kolekcja
 // Zadanie1
 // Zadanie1.java
 // 2018-03-29
@@ -17,14 +17,16 @@ public class Zadanie1
   public void start()
   {
     Lista<Integer> lista = new Lista<Integer>();
-    lista.Dodaj(5);
+    lista.Dodaj(1);
     lista.Dodaj(6);
+    lista.Dodaj(3);
+    lista.Dodaj(0);
     lista.Wypisz();
     System.out.print("Pobieram i usuwam: " + lista.Pobierz() + "\n");
     lista.Wypisz();
   }
 
-  public class Lista<T>
+  public class Lista<T extends Comparable>
   {
     private Lista<T> pierwszy;
     private Lista<T> next;
@@ -40,23 +42,27 @@ public class Zadanie1
       }
       else
       {
-        // if(pierwszy.wartosc > a)
-        // {
-        //   Lista<T> nowy = new Lista<T>();
-        //   nowy.wartosc = pierwszy.wartosc;
-        //   pierwszy.wartosc = a;
-        //   pierwszy.next = nowy;
-        //   nowy.next = null;
-        // }
-        // else
-        // {
-          while(pierwszy.next != null /*|| pierwszy.next.wartosc > a*/)
+        if(pierwszy.wartosc.compareTo(a) > 0)
+        {
+          Lista<T> nowy = new Lista<T>();
+          nowy.wartosc = pierwszy.wartosc;
+          pierwszy.wartosc = a;
+          nowy.next = pierwszy.next;
+          pierwszy.next = nowy;
+        }
+        else
+        {
+          while(pierwszy.next != null)
+          {
+            if(pierwszy.next.wartosc.compareTo(a) > 0)
+              break;
             pierwszy = pierwszy.next;
+          }
           Lista<T> nowy = new Lista<T>();
           nowy.wartosc = a;
           nowy.next = pierwszy.next;
           pierwszy.next = nowy;
-        // }
+        }
       }
     }
 
@@ -84,5 +90,7 @@ public class Zadanie1
           temp = temp.next;
       }
     }
+
+
   }
 }
