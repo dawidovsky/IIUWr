@@ -203,13 +203,13 @@ int operator - (const DataGodz &dt, const DataGodz &dt2)
 {
   Data obj;
   bool czy_przestepny = dt.get_r()%4 == 0 ? 1 : 0;
-  int ile_przestepnych = dt.get_r()/4;
+  int ile_przestepnych = dt.get_r()/4 - dt.get_r()/100 + dt.get_r()/400;
   int iledni = ile_przestepnych*366 + (dt.get_r()-ile_przestepnych)*365
                + obj.dniodpoczroku[czy_przestepny][dt.get_m()];
   int odjemna_sekundy = dt.get_min() * 60 + dt.get_sek();
   int odjemna =  iledni * 24;
   czy_przestepny = dt2.get_r()%4 == 0 ? 1 : 0;
-  ile_przestepnych = dt2.get_r()/4;
+  ile_przestepnych = dt2.get_r()/4 - dt2.get_r()/100 + dt2.get_r()/400;
   iledni = ile_przestepnych*366 + (dt2.get_r()-ile_przestepnych)*365
                + obj.dniodpoczroku[czy_przestepny][dt2.get_m()];
   int odjemnik_sekundy = dt2.get_min() * 60 + dt2.get_sek();
