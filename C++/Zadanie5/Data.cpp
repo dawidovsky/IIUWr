@@ -63,24 +63,9 @@ bool Data::czyPoprawna(const Data &dt)
 int Data::ileDniOdZera(const Data &dt)
 {
   bool prz = czyPrzestepny(dt);
-  int ile_przestepnych = dt.rok/4;
+  int ile_przestepnych = dt.rok/4 - dt.rok/100 + dt.rok/400;
   return ile_przestepnych*366 + (dt.rok-ile_przestepnych)*365 + dniodpoczroku[prz][dt.miesiac];
 }
-
-/*
-int Data::how_many_days(Data& d)
-{
-    int ilosc=0;
-    if (test_if_leap(d))
-    {
-        ilosc=dniodpoczroku[1][d.get_month()-1]+d.get_day();
-    }
-    else ilosc=dniodpoczroku[0][d.get_month()-1]+d.get_day();
-    int extra= (((d.get_year()/4)-(d.get_year()/100)) + (d.get_year()/400));
-    ilosc+=(extra*366)+((d.get_year()-extra)*365);
-    return ilosc;
-}
-*/
 
 //operatory
 int Data::operator - (const Data &dt)
