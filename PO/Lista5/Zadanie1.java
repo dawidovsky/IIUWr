@@ -1,6 +1,6 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porï¿½wnywalna kolekcja
+// L5, z1, Porównywalna kolekcja
 // Zadanie1
 // Zadanie1.java
 // 2018-03-29
