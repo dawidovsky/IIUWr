@@ -33,7 +33,7 @@ public class Prostokat extends Figury
   @Override
   public String toString()
   {
-    String str = "dlugosc: " + dlugosc + " szerokosc: " + szerokosc;
+    String str = "Prostokat: dlugosc: " + dlugosc + " szerokosc: " + szerokosc;
     str = str +" obwod: " + obwod() + " pole: " + pole();
     return str;
   }

@@ -29,6 +29,8 @@ public class Kwadrat extends Figury
   @Override
   public String toString()
   {
-    return "bok: " + dlugosc_boku + " pole: " + pole() +" obwod: " + obwod();
+    String str = "Kwadrat: dlugosc boku: " + dlugosc_boku ;
+    str = str +" obwod: " + obwod() + " pole: " + pole();
+    return str;
   }
 }

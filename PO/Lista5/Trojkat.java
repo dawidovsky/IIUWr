@@ -35,7 +35,7 @@ public class Trojkat extends Figury
   @Override
   public String toString()
   {
-    String str = "podstawa: " + podstawa + " wysokosc: " + wysokosc;
+    String str = "Trojkat: podstawa: " + podstawa + " wysokosc: " + wysokosc;
     str = str +" pole: " + pole();
     return  str;
   }

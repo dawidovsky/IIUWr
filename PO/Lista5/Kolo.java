@@ -29,6 +29,8 @@ public class Kolo extends Figury
   @Override
   public String toString()
   {
-    return "promien: " + promien + " pole: " + pole() +" obwod: " + obwod();
+    String str = "Kolo: promien: " + promien ;
+    str = str +" obwod: " + obwod() + " pole: " + pole();
+    return str;
   }
 }
