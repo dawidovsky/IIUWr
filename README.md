@@ -1,5 +1,4 @@
 # IIUWr
-Nauka
 
 ## Semestr 1 
 - Analiza Matematyczna (wyk: Maciej Paluszyński ćw: Antoni Kościelski)
