@@ -36,8 +36,7 @@ Data::Data(int dz, int ms, int rk)
   rok = rk;
   if(!czyPoprawna(*this))
   {
-    cout << "Bledne dane";
-    delete this;
+    throw "Bledne dane";
   }
 }
 
