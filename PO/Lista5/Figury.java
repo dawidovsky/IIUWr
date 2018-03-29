@@ -1,4 +1,4 @@
-// Dawid Paluszak
+  // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
 // L5, z1, Porównywalna hierarchia klas
 // Figury

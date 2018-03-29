@@ -1,6 +1,6 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porï¿½wnywalna hierarchia klas
+// L5, z1, Porównywalna hierarchia klas
 // Figury
 // Kwadrat.java
 // 2018-03-29
