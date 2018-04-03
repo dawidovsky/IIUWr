@@ -65,6 +65,8 @@ public class Zadanie1
     }
   }
 
+  // Lista zrobiona przeze mnie z dodan¹ bibliotek¹ Comparable do
+  // porównañ
   public class Lista<T extends Comparable>
   {
     private Lista<T> pierwszy;

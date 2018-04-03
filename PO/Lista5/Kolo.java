@@ -5,6 +5,7 @@
 // Kolo.java
 // 2018-03-29
 
+// klasa przechowuj¹ca ko³a
 public class Kolo extends Figury
 {
   double promien;

@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.io.IOException;
 import java.util.Scanner;
 
+// klasa zawieraj¹ca menu i obs³ugê figur
 public abstract class Figury implements Comparable<Figury>
 {
 
@@ -83,10 +84,13 @@ public abstract class Figury implements Comparable<Figury>
       }
   }
 
+  // wyliczanie pola ( nadpisywane w konkretnych klasach )
   public abstract double pole();
 
+  // wyliczanie obwodu ( nadpisywane w konkretnych klasach )
 	public abstract double obwod();
 
+  // porównywanie figur 
   @Override
 	public int compareTo(Figury o) {
 		return (int) Math.signum(pole() - o.pole());

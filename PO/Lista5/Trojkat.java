@@ -5,6 +5,7 @@
 // Trojkat.java
 // 2018-03-29
 
+// klasa przechowuj¹ca trójk¹ty
 public class Trojkat extends Figury
 {
   double podstawa;

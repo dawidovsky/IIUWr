@@ -5,6 +5,7 @@
 // Prostokat.java
 // 2018-03-29
 
+// klasa przechowuj¹ca prostok¹ty
 public class Prostokat extends Figury
 {
   double dlugosc;

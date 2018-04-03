@@ -7,6 +7,7 @@
 
 import java.util.Hashtable;
 
+// ob³uga zmiennych
 public class Zmienna implements Wyrazenie
 {
   String s;

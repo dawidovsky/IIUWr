@@ -5,6 +5,7 @@
 // Stala.java
 // 2018-03-29
 
+// ob³uga sta³ych
 public class Stala implements Wyrazenie
 {
   int val; // wartoœæ sta³ej

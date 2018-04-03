@@ -137,7 +137,6 @@
 
 
 ;; reprezentacja wewnętrzna
-
 ;; sprawdza posortowanie w porządku ściśle rosnącym, bez duplikatów
 (define (sorted? vs)
   (or (null? vs)
@@ -147,7 +146,7 @@
 
 (define (sorted-varlist? x)
   (and (list? x)
-       (andmap (var? x))
+       (andmap var? x)
        (sorted? x)))
 
 ;; klauzulę reprezentujemy jako parę list — osobno wystąpienia pozytywne i negatywne. Dodatkowo
@@ -205,13 +204,35 @@
 
 ;; TODO: miejsce na uzupełnienie własnych funkcji pomocniczych
 
+;; sprawdzamy czy którakolwiek z list (pozytywnych literałów i negatywnych)
+;; jest pusta, jeśli tak to zwracamy false
+;; wpp sprawdzamy czy pierwszy literał pozytywny występuje w liście
+;; negatywnych jeśli tak zwracamy true, a wpp wykonujemy to samo
+;; dla kolejnego literału z listy pozytywnych
 (define (clause-trivial? c)
-  ;; TODO: zaimplementuj!
-  false)
+  (define (check-pos-neg pos neg)
+    (cond [(or (null? pos) (null? neg)) #f]
+          [(member (car pos) neg) #t]
+          [else (check-pos-neg (cdr pos) neg)]))
+  (check-pos-neg (cadr c) (caddr c)))
 
+;; jak wyżej, tylko w przypadku wystąpienia zmiennej na liście negatywnych
+;; wypisujemy odpowiednie wyprowadzenie. W przypadku znalezienia
+;; sprawdzamy jeszcze czy klauzula jest sprzeczna.
 (define (resolve c1 c2)
-  ;; TODO: zaimplementuj!
-  (error "Not implemented!"))
+  (define (pos-neg pos neg)
+    (cond [(or (null? pos) (null? neg)) #f]
+          [(member (car pos) neg)
+           (let ((wynik (res-clause (cdr pos) (remove (car pos) neg)
+                                  (proof-res (car pos) (fifth c1) (fifth c2)))))
+             (if (clause-false? wynik)
+                 #f
+                 wynik))]
+
+          [else (pos-neg (cdr pos) neg)]))
+  (pos-neg (cadr c1) (caddr c2)))
+
+
 
 (define (resolve-single-prove s-clause checked pending)
   ;; TODO: zaimplementuj!
@@ -310,3 +331,33 @@
         (check-proof pf-val form))))
 
 ;;; TODO: poniżej wpisz swoje testy
+
+(define p (literal #t 'p))
+(define q (literal #t 'q))
+(define r (literal #t 'r))
+(define c1 (clause p q r))
+(define np (literal #f 'p))
+(define nq (literal #f 'q))
+(define nr (literal #f 'r))
+(define no (literal #f 'o))
+(define c2 (clause np nq nr))
+(define c3 (clause p np))
+(define c4 (clause np))
+(define c5 (clause p))
+(define cla2 (cnf c1 c4))
+(define cla (cnf c1 c2 c3))
+(define kla (form->clauses cla))
+(define k1 (car kla))
+(define k2 (cadr kla))
+(define k3 (caddr kla))
+(define kla2 (form->clauses cla2))
+(define kk1 (car kla2))
+(define kk2 (cadr kla2))
+(define cla3 (cnf c4 c5))
+(define cla4 (cnf c3))
+(define cla5 (cnf (clause np q) (clause np nr) (clause nq r) (clause p) (clause no)))
+(define kla3 (form->clauses cla3))
+(define kk3 (car kla3))
+(define kk4 (cadr kla3))
+(define wynik (resolve k1 k2)) ;; - prawidłowa
+(define sprzeczny (resolve kk3 kk4)) ;; - sprzeczna (wypisuje #f)/

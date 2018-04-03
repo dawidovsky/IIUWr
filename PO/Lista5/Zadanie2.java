@@ -7,6 +7,7 @@
 
 import java.util.Hashtable;
 
+// Main 
 public class Zadanie2
 {
 

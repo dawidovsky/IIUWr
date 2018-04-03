@@ -5,6 +5,8 @@
 // Dzialania.java
 // 2018-03-29
 
+
+// obs³uga dodawania
 class Dodaj implements Wyrazenie
 {
   Wyrazenie a;
@@ -31,6 +33,8 @@ class Dodaj implements Wyrazenie
   }
 }
 
+
+// obs³uga odejmowania
 class Odejmij implements Wyrazenie
 {
   Wyrazenie a;
@@ -57,6 +61,7 @@ class Odejmij implements Wyrazenie
   }
 }
 
+// obs³uga mno¿enia
 class Pomnoz implements Wyrazenie
 {
   Wyrazenie a;
@@ -82,6 +87,7 @@ class Pomnoz implements Wyrazenie
   }
 }
 
+// obs³uga dzielenia
 class Podziel implements Wyrazenie
 {
   Wyrazenie a;

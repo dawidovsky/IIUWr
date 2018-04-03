@@ -5,6 +5,7 @@
 // Kwadrat.java
 // 2018-03-29
 
+// klasa przechowuj¹ca kwadraty
 public class Kwadrat extends Figury
 {
   double dlugosc_boku;
