@@ -1,6 +1,6 @@
   // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porównywalna hierarchia klas
+// L5, z1, Porï¿½wnywalna hierarchia klas
 // Figury
 // Figury.java
 // 2018-03-29
@@ -11,10 +11,9 @@ import java.util.Collections;
 import java.io.IOException;
 import java.util.Scanner;
 
-// klasa zawieraj¹ca menu i obs³ugê figur
+// klasa zawierajï¿½ca menu i obsï¿½ugï¿½ figur
 public abstract class Figury implements Comparable<Figury>
 {
-
   public static void main(String[] args)
   {
       List<Figury> figury = new ArrayList<Figury>();
@@ -90,7 +89,7 @@ public abstract class Figury implements Comparable<Figury>
   // wyliczanie obwodu ( nadpisywane w konkretnych klasach )
 	public abstract double obwod();
 
-  // porównywanie figur 
+  // porï¿½wnywanie figur
   @Override
 	public int compareTo(Figury o) {
 		return (int) Math.signum(pole() - o.pole());

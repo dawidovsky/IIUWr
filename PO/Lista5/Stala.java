@@ -5,24 +5,25 @@
 // Stala.java
 // 2018-03-29
 
-// ob³uga sta³ych
+// obï¿½uga staï¿½ych
 public class Stala implements Wyrazenie
 {
-  int val; // wartoœæ sta³ej
+  
+  int val; // wartoï¿½ï¿½ staï¿½ej
 
-  // konstruktor sta³ej
+  // konstruktor staï¿½ej
   public Stala(int x)
   {
      val = x;
   }
 
-  // obliczanie sta³ej - zwracanie jej wartoœci
+  // obliczanie staï¿½ej - zwracanie jej wartoï¿½ci
   public int Oblicz()
   {
     return val;
   }
 
-  // £adne wypisanie sta³ej
+  // ï¿½adne wypisanie staï¿½ej
   public String toString()
   {
     return " " + val + " ";

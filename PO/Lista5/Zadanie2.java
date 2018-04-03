@@ -7,10 +7,9 @@
 
 import java.util.Hashtable;
 
-// Main 
+// Main
 public class Zadanie2
 {
-
   public static void main(String[] args)
   {
     Hashtable<String, Integer> Args = new Hashtable<String, Integer>();

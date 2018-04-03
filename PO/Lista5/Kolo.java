@@ -1,13 +1,14 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porównywalna hierarchia klas
+// L5, z1, Porï¿½wnywalna hierarchia klas
 // Figury
 // Kolo.java
 // 2018-03-29
 
-// klasa przechowuj¹ca ko³a
+// klasa przechowujï¿½ca koï¿½a
 public class Kolo extends Figury
 {
+  
   double promien;
 
   public Kolo(double r)

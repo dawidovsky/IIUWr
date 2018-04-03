@@ -1,13 +1,14 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porównywalna hierarchia klas
+// L5, z1, Porï¿½wnywalna hierarchia klas
 // Figury
 // Trojkat.java
 // 2018-03-29
 
-// klasa przechowuj¹ca trójk¹ty
+// klasa przechowujï¿½ca trï¿½jkï¿½ty
 public class Trojkat extends Figury
 {
+  
   double podstawa;
   double bok1;
   double bok2;

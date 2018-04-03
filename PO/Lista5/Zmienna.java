@@ -7,9 +7,10 @@
 
 import java.util.Hashtable;
 
-// ob³uga zmiennych
+// obï¿½uga zmiennych
 public class Zmienna implements Wyrazenie
 {
+  
   String s;
   Hashtable<String, Integer> Args;
 
@@ -19,14 +20,14 @@ public class Zmienna implements Wyrazenie
     this.s = s; this.Args = l;
   }
 
-  // obliczanie wartoœci zmiennej
-  // wypisuje wartoœæ przypisan¹ do stringa s
+  // obliczanie wartoï¿½ci zmiennej
+  // wypisuje wartoï¿½ï¿½ przypisanï¿½ do stringa s
   public int Oblicz()
   {
     return Args.get(s);
   }
 
-  // £adne wypisanie zmiennej
+  // ï¿½adne wypisanie zmiennej
   public String toString()
   {
     return " " + s + " ";

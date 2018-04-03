@@ -1,13 +1,14 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porównywalna hierarchia klas
+// L5, z1, Porï¿½wnywalna hierarchia klas
 // Figury
 // Kwadrat.java
 // 2018-03-29
 
-// klasa przechowuj¹ca kwadraty
+// klasa przechowujï¿½ca kwadraty
 public class Kwadrat extends Figury
 {
+  
   double dlugosc_boku;
 
   public Kwadrat(double a)

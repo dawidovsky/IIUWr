@@ -5,8 +5,7 @@
 // Dzialania.java
 // 2018-03-29
 
-
-// obs³uga dodawania
+// obsï¿½uga dodawania
 class Dodaj implements Wyrazenie
 {
   Wyrazenie a;
@@ -20,13 +19,13 @@ class Dodaj implements Wyrazenie
   }
 
   // obliczanie dodawania
-  // wyliczamy wartoœci wyra¿eñ a i b i sumujemy wyniki
+  // wyliczamy wartoï¿½ci wyraï¿½eï¿½ a i b i sumujemy wyniki
   public int Oblicz()
   {
     return a.Oblicz() + b.Oblicz();
   }
 
-  // £adne wypisanie dodawania
+  // ï¿½adne wypisanie dodawania
   public String toString()
   {
     return "(" + a + " + " + b + ")";
@@ -34,7 +33,7 @@ class Dodaj implements Wyrazenie
 }
 
 
-// obs³uga odejmowania
+// obsï¿½uga odejmowania
 class Odejmij implements Wyrazenie
 {
   Wyrazenie a;
@@ -48,20 +47,20 @@ class Odejmij implements Wyrazenie
   }
 
   // obliczanie odejmowania
-  // wyliczamy wartoœci wyra¿eñ a i b i odejmujemy wyniki
+  // wyliczamy wartoï¿½ci wyraï¿½eï¿½ a i b i odejmujemy wyniki
   public int Oblicz()
   {
     return a.Oblicz() - b.Oblicz();
   }
 
-  // £adne wypisanie odejmowania
+  // ï¿½adne wypisanie odejmowania
   public String toString()
   {
     return "(" + a + " - " + b + ")";
   }
 }
 
-// obs³uga mno¿enia
+// obsï¿½uga mnoï¿½enia
 class Pomnoz implements Wyrazenie
 {
   Wyrazenie a;
@@ -73,21 +72,21 @@ class Pomnoz implements Wyrazenie
     this.b = b;
   }
 
-  // obliczanie mno¿enia
-  // wyliczamy wartoœci wyra¿eñ a i b i mno¿ymy wyniki
+  // obliczanie mnoï¿½enia
+  // wyliczamy wartoï¿½ci wyraï¿½eï¿½ a i b i mnoï¿½ymy wyniki
   public int Oblicz()
   {
     return a.Oblicz() * b.Oblicz();
   }
 
-  // £adne wypisanie mno¿enia
+  // ï¿½adne wypisanie mnoï¿½enia
   public String toString()
   {
     return "(" + a + " * " + b + ")";
   }
 }
 
-// obs³uga dzielenia
+// obsï¿½uga dzielenia
 class Podziel implements Wyrazenie
 {
   Wyrazenie a;
@@ -100,13 +99,13 @@ class Podziel implements Wyrazenie
   }
 
   // obliczanie odejmowania
-  // wyliczamy wartoœci wyra¿eñ a i b i dzielimy wyniki
+  // wyliczamy wartoï¿½ci wyraï¿½eï¿½ a i b i dzielimy wyniki
   public int Oblicz()
   {
       return a.Oblicz() / b.Oblicz();
   }
 
-  // £adne wypisanie dzielenia
+  // ï¿½adne wypisanie dzielenia
   public String toString()
   {
     return "(" + a + " / " + b + ")";

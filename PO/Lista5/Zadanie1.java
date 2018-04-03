@@ -1,6 +1,6 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porównywalna kolekcja
+// L5, z1, Porï¿½wnywalna kolekcja
 // Zadanie1
 // Zadanie1.java
 // 2018-03-29
@@ -11,6 +11,7 @@ import java.util.Scanner;
 // Main
 public class Zadanie1
 {
+  
   public static void main(String[] args)
   {
     Zadanie1 start = new Zadanie1();
@@ -65,8 +66,8 @@ public class Zadanie1
     }
   }
 
-  // Lista zrobiona przeze mnie z dodan¹ bibliotek¹ Comparable do
-  // porównañ
+  // Lista zrobiona przeze mnie z dodanï¿½ bibliotekï¿½ Comparable do
+  // porï¿½wnaï¿½
   public class Lista<T extends Comparable>
   {
     private Lista<T> pierwszy;
@@ -122,7 +123,7 @@ public class Zadanie1
       return war;
     }
 
-    // Wypisaywanie zawartoœci listy
+    // Wypisaywanie zawartoï¿½ci listy
     public void Wypisz()
     {
       if(pierwszy == null)

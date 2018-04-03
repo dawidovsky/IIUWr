@@ -5,9 +5,10 @@
 // Wyrazenie.java
 // 2018-03-29
 
-// obs³uga wyra¿eñ
+// obsï¿½uga wyraï¿½eï¿½
 public interface Wyrazenie
 {
-  // Oblicz nadpisywane w klasach obliczaj¹cych
+  // Oblicz nadpisywane w klasach obliczajï¿½cych
   public int Oblicz();
+  
 }

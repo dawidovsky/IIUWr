@@ -1,13 +1,14 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porównywalna hierarchia klas
+// L5, z1, Porï¿½wnywalna hierarchia klas
 // Figury
 // Prostokat.java
 // 2018-03-29
 
-// klasa przechowuj¹ca prostok¹ty
+// klasa przechowujï¿½ca prostokï¿½ty
 public class Prostokat extends Figury
 {
+  
   double dlugosc;
   double szerokosc;
   double pole;
