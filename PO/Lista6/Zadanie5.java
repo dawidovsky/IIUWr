@@ -1,15 +1,16 @@
 // Dawid Paluszak
 // Pracownia PO, czwartek, s. 108
-// L5, z1, Porï¿½wnywalna hierarchia klas
-// Figury
-// Figury.java
-// 2018-03-29
+// L6, z5, MergeSort poprzez w¹tki
+// Zadanie5
+// Zadanie5.java
+// 2018-04-05
 
 import java.util.Scanner;
 
 public class Zadanie5
 {
 
+	// implementacja menu do mergesort'a
 	public static void main(String[] args)
 	{
 		int r = 0, liczba;

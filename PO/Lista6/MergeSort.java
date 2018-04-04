@@ -1,17 +1,29 @@
+// Dawid Paluszak
+// Pracownia PO, czwartek, s. 108
+// L6, z5, MergeSort poprzez w¹tki
+// Zadanie5
+// Zadanie5.java
+// 2018-04-05
+
+// implementacja mergesort'a poprzez w¹tki
 class MergeSort extends Thread
 {
 
   public int[] array;
 
+  // konstruktor
   public MergeSort(int[] a)
   {
     array = a;
   }
 
+  // sortowanie
   public void mergeSort(int[] array)
   {
     if (array.length > 1)
     {
+      // tablicê dzielimy na dwie mniejsze tablice i wykonujemy na nich
+      // sortowanie wywo³uj¹c je jako kolejny w¹tek
       int[] left = leftHalf(array);
       int[] right = rightHalf(array);
 
@@ -35,6 +47,8 @@ class MergeSort extends Thread
     }
   }
 
+  // przepisywanie pierwszej po³owy tablicy i zapisywanie jej
+  // do tablicy pomocniczej
   public int[] leftHalf(int[] array)
   {
     int size1 = array.length / 2;
@@ -46,6 +60,8 @@ class MergeSort extends Thread
     return left;
   }
 
+  // przepisywanie drugiej po³owy tablicy i zapisywanie jej
+  // do tablicy pomocniczej
   public int[] rightHalf(int[] array)
   {
     int size1 = array.length / 2;
@@ -58,6 +74,7 @@ class MergeSort extends Thread
     return right;
   }
 
+  // ³¹czenie dwóch tablic
   public void merge(int[] result, int[] left, int[] right)
   {
     int i1 = 0;
@@ -78,8 +95,9 @@ class MergeSort extends Thread
     }
   }
 
-   public void run()
-   {
-       mergeSort(array);
-   }
+  // uruchomienie w¹tku
+  public void run()
+  {
+    mergeSort(array);
+  }
 }
