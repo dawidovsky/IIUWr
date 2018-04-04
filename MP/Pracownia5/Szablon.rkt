@@ -223,8 +223,9 @@
   (define (pos-neg pos neg)
     (cond [(or (null? pos) (null? neg)) #f]
           [(member (car pos) neg)
-           (let ((wynik (res-clause (cdr pos) (remove (car pos) neg)
-                                  (proof-res (car pos) (fifth c1) (fifth c2)))))
+           (let ((wynik (res-clause (append (cdr pos) (cadr c2))
+                                    (append (remove (car pos) neg) (caddr c1))
+                                    (proof-res (car pos) (fifth c1) (fifth c2)))))
              (if (clause-false? wynik)
                  #f
                  wynik))]
@@ -290,10 +291,47 @@
     (subsume-add-prove checked (insert (car new) pending) (cdr new))
     ]))
 
+;; z ćwiczeń
+;; generator wszystkich wartościowań
+(define (gen-vals  xs)
+  (if (null? xs)
+      (list  null)
+      (let*
+          ((vss   (gen-vals (cdr xs)))
+           (x     (car xs))
+           (vst   (map(lambda(vs) (cons (list x true)   vs)) vss))
+           (vsf   (map(lambda(vs) (cons (list x false) vs)) vss)))
+        (append  vst  vsf))))
+
+;; tworzy listę zmiennych wolnych jednej klauzuli
+(define (free-vars xs)
+  (define (helper wynik res)
+    (cond [(null? res) wynik]
+          [(axiom? res) '()]
+          [(sorted-varlist? res) (merge-vars res wynik)]
+          [(res-clause? res)
+           (merge-vars wynik
+                       (merge-vars (merge-vars (helper wynik (second res))
+                                               (helper wynik (third res)))
+                                   (helper wynik (fifth res))))]
+          [(res? res)
+           (merge-vars wynik
+                       (merge-vars (merge-vars (helper wynik (second res))
+                                               (helper wynik (third res)))
+                                   (helper wynik (fourth res))))]))
+  (helper '() xs))
+
+;; przechodzi przez wszystkie klauzule i tworzy listę zmiennych wolnych
+(define (generate wynik xs)
+  (if (null? xs)
+      wynik
+      (generate (merge-vars (free-vars (car xs)) wynik) (cdr xs))))
+
+
 (define (generate-valuation resolved)
-  ;; TODO: zaimplementuj!
+  (let ((vars (gen-vals (generate '() resolved))))
   ;; Ta implementacja mówi tylko że formuła może być spełniona, ale nie mówi jak. Uzupełnij ją!
-  'sat)
+  (list 'sat vars)))
 
 ;; procedura przetwarzające wejściowy CNF na wewnętrzną reprezentację klauzul
 (define (form->clauses f)
@@ -335,29 +373,12 @@
 (define p (literal #t 'p))
 (define q (literal #t 'q))
 (define r (literal #t 'r))
-(define c1 (clause p q r))
+(define o (literal #t 'o))
 (define np (literal #f 'p))
 (define nq (literal #f 'q))
 (define nr (literal #f 'r))
 (define no (literal #f 'o))
-(define c2 (clause np nq nr))
-(define c3 (clause p np))
-(define c4 (clause np))
-(define c5 (clause p))
-(define cla2 (cnf c1 c4))
-(define cla (cnf c1 c2 c3))
-(define kla (form->clauses cla))
-(define k1 (car kla))
-(define k2 (cadr kla))
-(define k3 (caddr kla))
-(define kla2 (form->clauses cla2))
-(define kk1 (car kla2))
-(define kk2 (cadr kla2))
-(define cla3 (cnf c4 c5))
-(define cla4 (cnf c3))
-(define cla5 (cnf (clause np q) (clause np nr) (clause nq r) (clause p) (clause no)))
-(define kla3 (form->clauses cla3))
-(define kk3 (car kla3))
-(define kk4 (cadr kla3))
-(define wynik (resolve k1 k2)) ;; - prawidłowa
-(define sprzeczny (resolve kk3 kk4)) ;; - sprzeczna (wypisuje #f)/
+(define c (cnf (clause np q) (clause np nr o) (clause nq r) (clause p) (clause no)))
+(define k2 (form->clauses c))
+(define c2 (cnf (clause p nq) (clause np)))
+(define k (form->clauses c2))
