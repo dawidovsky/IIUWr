@@ -70,4 +70,36 @@
   (helper form '()))
 
 (free-vars formula)
-(free-vars con)      
+(free-vars con)
+
+;; z zajęć
+;; generator wszystkich wartościowań z listy zmiennych
+(define (gen-vals xs)
+  (if (null? xs)
+      (list  null)
+      (let*
+          ((vss   (gen-vals (cdr xs)))
+           (x     (car xs))
+           (vst   (map(lambda(vs) (cons (list x true)   vs)) vss))
+           (vsf   (map(lambda(vs) (cons (list x false) vs)) vss)))
+        (append  vst  vsf))))
+
+;; tworzy listę zmiennych wolnych
+(define (free-vars form)
+  (define (helper wynik res)
+    (cond [(null? res) wynik]
+          [(sorted-varlist? res) (merge-vars res wynik)]
+          [(res-clause? (car res))
+           (merge-vars wynik
+                       (merge-vars (helper wynik (second (car res)))
+                                   (helper wynik (third (car res))))
+                       )]
+          [else (helper wynik (cdr res))]))
+  (helper '() form))
+
+;; sprawdzamy czy dla danego wartościowania klauzula jest spełnialna
+(define (satisfiable? list-bool res)
+  (let ((pos (cadr res))
+        (neg (caddr res)))
+    (define (sat-pos bool)
+      

@@ -279,6 +279,18 @@
            (sorted-rs    (sort-clauses resolvents)))
       (subsume-add-prove (cons next-clause checked) rest-pending sorted-rs))]))
 
+
+;; zawieranie
+(define (containing? xs ys)
+  (let ((posx (second xs))
+        (posy (second ys))
+        (negx (third xs))
+        (negy (third ys)))
+    (if (and (equal? posx (intersection posx posy))
+             (equal? negx (intersection negx negy)))
+        #t
+        #f)))
+
 ;; procedura upraszczająca stan obliczeń biorąc pod uwagę świeżo wygenerowane klauzule i
 ;; kontynuująca obliczenia. Do uzupełnienia.
 (define (subsume-add-prove checked pending new)
@@ -289,49 +301,59 @@
    [(clause-false? (car new))   (list 'unsat (res-clause-proof (car new)))]
    ;; jeśli klauzula jest trywialna to nie ma potrzeby jej przetwarzać
    [(clause-trivial? (car new)) (subsume-add-prove checked pending (cdr new))]
+   [(ormap (lambda (x) (containing? (car new) x)) checked)
+    (subsume-add-prove checked pending (cdr new))]
+   [(ormap (lambda (x) (containing? (car new) x)) pending)
+    (subsume-add-prove checked pending (cdr new))]
    [else
-    ;; TODO: zaimplementuj!
-    ;; Poniższa implementacja nie sprawdza czy nowa klauzula nie jest lepsza (bądź gorsza) od już
-    ;; rozpatrzonych; popraw to!
     (subsume-add-prove checked (insert (car new) pending) (cdr new))
     ]))
 
-;; usuwanie klauzul, w których wartościowana zmienna wystąpiła pozytywnie
-(define (remove-cl-pos var res)
-  (define (new-clau-list var res new)
-    (cond [(null? res) new]
-          [(not (member var (second (car res))))
-           (new-clau-list var (cdr res)(cons (car res) new))]
-          [else (new-clau-list var (cdr res) new)]))
-  (new-clau-list var res '()))
-
-;; usuwanie klauzul, w których wartościowana zmienna wystąpiła negatywnie
-(define (remove-cl-neg var res)
-  (define (new-clau-list var res new)
-    (cond [(null? res) new]
-          [(not (member var (third (car res))))
-           (new-clau-list var (cdr res)(cons (car res) new))]
-          [else (new-clau-list var (cdr res) new)]))
-  (new-clau-list var res '()))
+;; usuwanie z wszystkich klauzul w res
+;; wszystkich wystąpień vars ( gdzie vars to zmienne które już wystąpiły podczas generowania)
+(define (remove-vars vars res)
+  (define (new-clau-list vars res new)
+    (cond [(null? res) (sort-clauses new)]
+          [else (let ((new-cl (res-clause
+                               (remq* vars (second (car res)))
+                              (remq* vars (third (car res)))
+                              (fifth (car res)))))
+                  (new-clau-list vars (cdr res) (cons new-cl new)))]))
+  (new-clau-list vars res '()))
 
 ;; generator wartościowań
-;; jeżeli lista klauzul jest pusta to zwracamy wartościowanie
-;; wpp jeżeli klauzula zawiera element pozytywny to wybieramy go
-;; nadajemy mu wartość #t i usuwamy wszystkie klauzule, w których
-;; ta zmienna wystąpiła
-;; wpp jak wyżej tylko negatywne zmienne
+;; jeżeli lista klauzul jest nullem zwracamy wartościowanie
+;; jeżeli klauzula ma jedną zmienną to wstawiamy ją do
+;; listy wartościowań z odpowiednim wartościowaniem i
+;; wstawiamy ją również do listy varsToRem
+;; jeżeli napotkamy na klauzule, która me więcej zmiennych to
+;; jeżeli jest coś na liście varsToRem to usuwamy ze wszystkich pozostałych
+;; klauzul wystąpienia tych zmiennych i zerujemy listę varsToRem
+;; jeżeli lista varsToRem jest pusta to bierzemy pierwszą zmienną
+;; z klauzuli i wstawiamy ją do listy wartościowań i varsToRem
 (define (generate-valuation resolved)
-  (define (helper vars res)
+  (define (helper varsToRem vars res)
       (cond [(null? res) (list 'sat vars)]
-            [(not (null? (second (car res))))
-             (helper
-              (cons (list (car (second (car res))) #t) vars)
-              (remove-cl-pos (car (second (car res))) (cdr res)))]
-            [(not (null? (third (car res))))
-             (helper
-              (cons (list (car (third (car res))) #f) vars)
-              (remove-cl-neg (car (third (car res))) (cdr res)))]))
-  (helper '() resolved))
+            [(clause-false? (car res)) (helper varsToRem vars(cdr res))]
+            [(= 1 (fourth (car res)))
+             (if (null? (second (car res)))
+                 (helper (cons (car (third (car res))) varsToRem)
+                         (cons (list (car (third (car res))) #f) vars)
+                         (cdr res))
+                 (helper (cons (car (second (car res))) varsToRem)
+                         (cons (list (car (second (car res))) #t) vars)
+                         (cdr res)))]
+            [else (if (null? varsToRem)
+                      (if (null? (second (car res)))
+                          (helper (cons (car (third (car res))) varsToRem)
+                                  (cons (list (car (third (car res))) #f) vars)
+                                  (cdr res))
+                          (helper (cons (car (second (car res))) varsToRem)
+                                  (cons (list (car (second (car res))) #t) vars)
+                                  (cdr res)))
+                      (helper '() vars
+                              (remove-vars varsToRem res)))]))
+  (helper '() '() resolved))
           
 
 ;; procedura przetwarzające wejściowy CNF na wewnętrzną reprezentację klauzul
@@ -376,10 +398,12 @@
 (define q (literal #t 'q))
 (define r (literal #t 'r))
 (define o (literal #t 'o))
+(define s (literal #t 's))
 (define np (literal #f 'p))
 (define nq (literal #f 'q))
 (define nr (literal #f 'r))
 (define no (literal #f 'o))
+(define ns (literal #f 's))
 
 ;; test rezolucji
 (define c2 (cnf (clause p nq)(clause np)))
@@ -405,7 +429,9 @@ c
 (display "wygląda następująco:\n\n")
 (prove-and-check c) ;; dodów sprzeczności formuły
 
-(define c4 (cnf (clause np)(clause o)(clause nr)(clause p q)))
+;; testy spełnialnych 
+
+(define c4 (cnf (clause p nq) (clause q r) (clause r o)))
 (define k4 (form->clauses c4))
 (display "\nTestowania spełnialności klauzul :\n")
 c4
@@ -413,3 +439,24 @@ c4
 (prove c4)
 (display "\nCzy się zgadza?\n")
 (prove-and-check c4)
+
+
+(define c5 (cnf (clause p) (clause q) (clause r)))
+(define k5 (form->clauses c5))
+(display "\nTestowania spełnialności klauzul :\n")
+c5
+(display "\nWartościowanie wygląda następująco:\n\n")
+(prove c5)
+(display "\nCzy się zgadza?\n")
+(prove-and-check c5)
+
+(define c6 (cnf (clause p nq) (clause q no) (clause o r)))
+(define k6 (form->clauses c6))
+(display "\nTestowania spełnialności klauzul :\n")
+c6
+(display "\nWartościowanie wygląda następująco:\n\n")
+(prove c6)
+(display "\nCzy się zgadza?\n")
+(prove-and-check c6)
+
+;; Bez zadania 3 - tylko subsum w jedną stronę jest zrobiony oraz procedura zawierania
