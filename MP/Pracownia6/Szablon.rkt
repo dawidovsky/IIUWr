@@ -93,13 +93,37 @@
   (and (arith/let/holes? t)
        (= (num-of-holes t) 1)))
 
+;; pomocnicza procedura zawiera listę wynikową i let-wyrażenie
+;; jeżeli natrafimy na symbol 'hole to zwracamy listę wynikową
+;; jeżeli natrafimy na let? i 'hole nie występuje w definicja let'a
+;; to dodajemy zmienną która jest w definicji do listy wynikowej
+;; jeżeli hole występuje w definicja leta to zwracamy listę wynikową
+;; jeżeli natrafimy na wyrażenie binop? to wywołujemy procedurę na
+;; binop-left i binop-right
 (define (hole-context e)
-  ;; TODO: zaimplementuj!
-  (error "Not implemented!")
-  )
+  (define (hole-list xs res)
+    (if (arith/let/hole-expr? e)
+        (cond [(eq? 'hole res) (remove-duplicates xs)]
+              [(let? res)
+               (if (member 'hole (let-def res))
+                   (remove-duplicates xs)
+                   (hole-list
+                    (cons (let-def-var (let-def res)) xs)
+                    (let-expr res)))]
+              [(binop? res)
+               (hole-list xs (binop-left res))
+               (hole-list xs (binop-right res))])
+        #f))
+  (hole-list '() e))
+
+(define t1 '(+ 3 hole))
+(define t2 (hole-context '(let(x 3) (let(y 7) (+ x hole)))))
+(define t3 (hole-context '(let(x 3) (let(y hole) (+ x 3)))))
+(define t4 (hole-context '(let(x hole) (let(y 7) (+ x 3)))))
+(define t5 (hole-context '(let (piesek  1)(let(kotek  7)(let(piesek  9)(let(chomik  5) hole))))))
+(define t6 (hole-context '(+ (let (x 4) 5) hole)))
 
 (define (test)
-  ;; TODO: zaimplementuj!
-  (error "Not implemented!")
+  (display "test")
   )
 
