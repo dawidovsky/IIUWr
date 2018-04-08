@@ -114,31 +114,40 @@
                (if (arith/let/hole-expr? (binop-left res))
                    (hole-list xs (binop-left res))
                    (hole-list xs (binop-right res)))])
-        #f))
+        (error "Bledne wyrazenie")))
   (hole-list '() e))
 
+;; sortowanie z poprzedniej pracowni sortujące po symbolach
 (define (var<? x y)
   (symbol<? x y))
 
-(define (test)
+;; testy przechowujemy w tests, gdzie tests to lista dwuelementowych list
+;; gdzie pierwszym elementem podlisty jest hole-wyrażenie, a drugim spodziewany wynik
+;; otrzymany wynik jak i spodziewany sortuję procedurą z poprzedniej pracowni
+;; by uniknąć sprzeczności w porównywaniu list
+;; w przypadku przejścia wszystkich testów zwracane jest #t
+;; wpp zwracamy hole-wyrażenie, które zwraca fałszywy wynik,
+;; wynik jaki zwróciło hole-context oraz wynik spodziewany
+ (define (test)
   (define tests
-    (list '((+ 3 hole) '())
-          '('(let(x 3) (let(y 7) (+ x hole))) '(x y))
-          '('(let(x 3) (let(y hole) (+ x 3))) '(x))
-          '('(let(x hole) (let(y 7) (+ x 3))) '())
-          '('(let (piesek 1)(let(kotek 7)(let(piesek 9)(let(chomik 5) hole)))) '(chomik kotek piesek))
-          '('(+ (let (x 4) 5) hole) '())
+    (list (list '(+ 3 hole) '())
+          (list '(let(x 3) (let(y 7) (+ x hole))) '(x y))
+          (list '(let(x 3) (let(y hole) (+ x 3))) '(x))
+          (list '(let(x hole) (let(y 7) (+ x 3))) '())
+          (list '(let (piesek 1)(let(kotek 7)(let(piesek 9)(let(chomik 5) hole)))) '(chomik kotek piesek))
+          (list '(+ (let (x 4) 5) hole) '())
           ))
   (define (check xs)
   (cond [(null? xs) #t]
-        [(equal? (cadr xs) (hole-context (caar xs)))
+        [(equal? (sort (cadar xs) var<?) (sort (hole-context (caar xs)) var<?))
          (check (cdr xs))]
         [else
-         (display "Bledne rozwiazanie w tescie ")
-         (caar xs)
-         (display "Powinno być:")
-         (cadr xs)]))
+         (display "Bledne rozwiazanie w tescie: \n")
+         (display (caar xs))
+         (display "\n Otrzymano: \n")
+         (hole-context (caar xs))
+         (display "Powinno być:\n")
+         (display (cadar xs))]))
   (check tests))
          
-         
-
+        
