@@ -26,13 +26,27 @@ int main()
   cout << r->opis() << " = " << r->oblicz() << endl;
 
   //zmienne
-  vector<pair<string,double>> v;
   Wyrazenie *t =
   new Dziel(
     new Mnoz(
       new Odejmij(new Zmienna("x"),new Liczba(1)),
       new Zmienna("x")),
     new Liczba(2));
-    Zmienna::dodaj_do_wektora("x",3);
-  cout << t->opis() << " = " << t->oblicz();
+    // for(double i=0.0;i<=1.0;i=i+0.01)
+    // {
+       Zmienna::dodaj_do_wektora("x",3);
+       cout << t->opis() << " = " << t->oblicz() << endl;
+    // }
+
+    Wyrazenie *y =
+    new Odejmij(
+      new Dodaj(
+        new Liczba(2),
+        new Mnoz(new Zmienna("x"),new Liczba(7))),
+      new Dodaj(
+        new Mnoz(new Zmienna("y"),new Liczba(3)),
+        new Liczba(5)));
+
+      cout << y->opis() << " = " << y->oblicz() << endl;
+
 }

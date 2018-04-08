@@ -17,10 +17,19 @@ string Zmienna::opis()
 
 void Zmienna::dodaj_do_wektora(string a, double war)
 {
-  tab.push_back(make_pair(a,war));
+  if(!czyJest(a))
+    tab.push_back(make_pair(a,war));
+  else
+  {
+    for(auto i = tab.begin(); i != tab.end(); i++ )
+    {
+       if(i->first == a)
+        i->second = war;
+    }
+  }
 }
 
-double Zmienna::szukaj(string x)
+double Zmienna::wypisz(string x)
 {
   for(auto i = tab.begin(); i != tab.end(); i++ )
   {
@@ -29,7 +38,17 @@ double Zmienna::szukaj(string x)
   }
 }
 
+bool Zmienna::czyJest(string x)
+{
+  for(auto i = tab.begin(); i != tab.end(); i++ )
+  {
+     if(i->first == x)
+      return true;
+  }
+  return false;
+}
+
 double Zmienna::oblicz()
 {
-  return szukaj(nazwa);
+  return wypisz(nazwa);
 }

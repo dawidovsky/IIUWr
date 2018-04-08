@@ -32,7 +32,13 @@ double Dodaj::oblicz()
 
 string Dodaj::opis()
 {
-  return a->opis() + " + " + b->opis();
+  string lewa = a->opis();
+  if(a->get_prio() <= priorytet)
+    lewa = "(" + lewa + ")";
+  string prawa = b->opis();
+  if(b->get_prio() <= priorytet)
+    prawa = "(" + prawa + ")";
+  return lewa + " + " + prawa;
 }
 
 Odejmij::Odejmij(Wyrazenie *lewa, Wyrazenie *prawa)
@@ -48,7 +54,13 @@ double Odejmij::oblicz()
 
 string Odejmij::opis()
 {
-  return a->opis() + " - " + b->opis();
+  string lewa = a->opis();
+  if(a->get_prio() <= priorytet)
+    lewa = "(" + lewa + ")";
+  string prawa = b->opis();
+  if(b->get_prio() <= priorytet)
+    prawa = "(" + prawa + ")";
+  return lewa + " - " + prawa;
 }
 
 Mnoz::Mnoz(Wyrazenie *lewa, Wyrazenie *prawa)

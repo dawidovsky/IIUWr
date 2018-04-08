@@ -37,7 +37,8 @@ class Zmienna : public Wyrazenie
     virtual double oblicz();
     virtual string opis();
     void static dodaj_do_wektora(string a, double war);
-    double static szukaj(string x);
+    bool static czyJest(string x);
+    double static wypisz(string x);
     virtual get_prio(){return priorytet;};
     Zmienna(string a);
     Zmienna(vector<pair<string,double>> v);
