@@ -33,11 +33,9 @@ double Dodaj::oblicz()
 string Dodaj::opis()
 {
   string lewa = a->opis();
-  if(a->get_prio() <= priorytet)
-    lewa = "(" + lewa + ")";
   string prawa = b->opis();
-  if(b->get_prio() <= priorytet)
-    prawa = "(" + prawa + ")";
+  // if(b->get_prio() == priorytet)
+  //   prawa = "(" + prawa + ")";
   return lewa + " + " + prawa;
 }
 
@@ -55,11 +53,9 @@ double Odejmij::oblicz()
 string Odejmij::opis()
 {
   string lewa = a->opis();
-  if(a->get_prio() <= priorytet)
-    lewa = "(" + lewa + ")";
   string prawa = b->opis();
-  if(b->get_prio() <= priorytet)
-    prawa = "(" + prawa + ")";
+  if(b->get_prio() == priorytet)
+     prawa = "(" + prawa + ")";
   return lewa + " - " + prawa;
 }
 
@@ -77,10 +73,10 @@ double Mnoz::oblicz()
 string Mnoz::opis()
 {
   string lewa = a->opis();
-  if(a->get_prio() <= priorytet)
+  if(a->get_prio() < priorytet)
     lewa = "(" + lewa + ")";
   string prawa = b->opis();
-  if(b->get_prio() <= priorytet)
+  if(b->get_prio() < priorytet)
     prawa = "(" + prawa + ")";
   return lewa + " * " + prawa;
 }
@@ -101,10 +97,10 @@ double Dziel::oblicz()
 string Dziel::opis()
 {
   string lewa = a->opis();
-  if(a->get_prio() <= priorytet)
+  if(a->get_prio() < priorytet)
     lewa = "(" + lewa + ")";
   string prawa = b->opis();
-  if(b->get_prio() <= priorytet)
+  if(b->get_prio() < priorytet)
     prawa = "(" + prawa + ")";
   return lewa + " / " + prawa;
 }
@@ -123,10 +119,10 @@ double Potega::oblicz()
 string Potega::opis()
 {
   string lewa = a->opis();
-  if(a->get_prio() <= priorytet)
+  if(a->get_prio() < priorytet)
     lewa = "(" + lewa + ")";
   string prawa = b->opis();
-  if(b->get_prio() <= priorytet)
+  if(b->get_prio() < priorytet)
     prawa = "(" + prawa + ")";
   return lewa + " ^ " + prawa;
 }
@@ -144,7 +140,13 @@ double Log::oblicz()
 
 string Log::opis()
 {
-  return "log" + a->opis() + "z" + b->opis();
+  string lewa = a->opis();
+  if(a->get_prio() <= priorytet)
+    lewa = "(" + lewa + ")";
+  string prawa = b->opis();
+  if(b->get_prio() <= priorytet)
+    prawa = "(" + prawa + ")";
+  return "log" + lewa + "z" + prawa;
 }
 
 Modulo::Modulo(Wyrazenie *lewa, Wyrazenie *prawa)
@@ -161,10 +163,10 @@ double Modulo::oblicz()
 string Modulo::opis()
 {
   string lewa = a->opis();
-  if(a->get_prio() <= priorytet)
+  if(a->get_prio() < priorytet)
     lewa = "(" + lewa + ")";
   string prawa = b->opis();
-  if(b->get_prio() <= priorytet)
+  if(b->get_prio() < priorytet)
     prawa = "(" + prawa + ")";
   return lewa + "%" + prawa;
 }

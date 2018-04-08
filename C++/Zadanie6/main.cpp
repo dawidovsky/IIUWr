@@ -49,4 +49,20 @@ int main()
 
       cout << y->opis() << " = " << y->oblicz() << endl;
 
+    // potęgowania
+    Wyrazenie *u = new Potega(new Liczba(2),
+                              new Potega(new Liczba(2),new Liczba(3)));
+
+    cout << u->opis() << " = " << u->oblicz() << endl;
+
+    // odejmowanie - problem z prawą stroną
+    Wyrazenie *i = new Odejmij(
+                new Odejmij(new Liczba(1),new Liczba(3)),
+                new Odejmij(new Liczba(1),new Liczba(4)));
+
+    cout << i->opis() << " = " << i->oblicz() << endl;
+
+  Wyrazenie * qw = new Odejmij(new Odejmij(new Liczba(2), new Liczba(3)), new Mnoz(new Liczba(4), new Liczba(5)));
+
+  cout << qw->opis() << " = " << qw->oblicz() << endl;
 }
