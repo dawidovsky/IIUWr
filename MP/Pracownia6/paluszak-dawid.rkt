@@ -99,7 +99,8 @@
 ;; to dodajemy zmienną która jest w definicji do listy wynikowej
 ;; jeżeli hole występuje w definicja leta to zwracamy listę wynikową
 ;; jeżeli natrafimy na wyrażenie binop? to wywołujemy procedurę na
-;; binop-left i binop-right
+;; binop-left lub binop-right zależnie od tego, w której części
+;; znajduje się 'hole
 (define (hole-context e)
   (define (hole-list xs res)
     (if (arith/let/hole-expr? e)
