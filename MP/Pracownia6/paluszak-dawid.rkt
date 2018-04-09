@@ -131,7 +131,7 @@
  (define (test)
   (define tests
     (list (list '(+ 3 hole) '())
-          (list '(let(x 3) (let(y 7) (+ x hole))) '(x y))
+          (list '(let(x 3) (let(y 7) (+ x hole))) '(y x))
           (list '(let(x 3) (let(y hole) (+ x 3))) '(x))
           (list '(let(x hole) (let(y 7) (+ x 3))) '())
           (list '(let (piesek 1)(let(kotek 7)(let(piesek 9)(let(chomik 5) hole)))) '(chomik kotek piesek))
@@ -145,9 +145,9 @@
          (display "Bledne rozwiazanie w tescie: \n")
          (display (caar xs))
          (display "\n Otrzymano: \n")
-         (hole-context (caar xs))
-         (display "Powinno być:\n")
-         (display (cadar xs))]))
+         (display (sort (hole-context (caar xs)) var<?))
+         (display "\nPowinno być:\n")
+         (display (sort (cadar xs) var<?))]))
   (check tests))
          
         
