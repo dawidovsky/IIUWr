@@ -137,6 +137,7 @@
           (list '(let(x hole) (let(y 7) (+ x 3))) '())
           (list '(let (piesek 1)(let(kotek 7)(let(piesek 9)(let(chomik 5) hole)))) '(chomik kotek piesek))
           (list '(+ (let (x 4) 5) hole) '())
+          (list '(+ x (let (y 3) (+ y hole))) '(y))
           ))
   (define (check xs)
   (cond [(null? xs) #t]
