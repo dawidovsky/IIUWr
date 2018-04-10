@@ -278,3 +278,8 @@
 
 (define (eval e)
   (eval-env e empty-env))
+
+(eval '(let (x 5) (lambda (z) (let (y 5) (+ x y z)))))
+(eval '(let (x 5) (lambda (x) (let (y 5) (+ x y)))))
+(eval '((lambda (x) (lambda (y) (+ x y))) 10))
+(eval '(let (y 3) ((lambda (x) (+ x y))2)))
