@@ -13,22 +13,21 @@ import java.util.Scanner;
 
 public class Tramwaje extends Pojazd implements Serializable
 {
-  int ilosc_miejsc;
-  int numer_id;
-  int max_predkosc;
-
-  public Tramwaje(int i, int n, int p)
+  String numer_id;
+  String ilosc_miejsc;
+  
+  public Tramwaje(String i, String n, String pr)
   {
-    ilosc_miejsc = i;
-    numer_id = n;
-    max_predkosc = p;
+    numer_id = i;
+    ilosc_miejsc = n;
+    predkosc = pr;
   }
 
   @Override
   public String toString()
   {
-    String str = "Tramwaj " + numer_id + " o ilosci miejsc " + ilosc_miejsc;
-    str = str + " osiaga maksymalnie " + max_predkosc;
+    String str = "Tramwaj " + numer_id + " o ilosci miejsc "
+    + ilosc_miejsc + " osiaga maksymalnie " + predkosc + " km/h";
     return str;
   }
 }

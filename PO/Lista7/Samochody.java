@@ -15,20 +15,19 @@ public class Samochody extends Pojazd implements Serializable
 {
   String wlasciciel;
   String marka;
-  int max_predkosc;
 
-  public Samochody(String w, String m, int p)
+  public Samochody(String wl, String ma, String pr)
   {
-    wlasciciel = w;
-    marka = m;
-    max_predkosc = p;
+    wlasciciel = wl;
+    marka = ma;
+    predkosc = pr;
   }
 
   @Override
   public String toString()
   {
-    String str = marka + " nalezacy do " + wlasciciel;
-    str = str + " osiaga " + max_predkosc;
+    String str = marka + " nalezacy do " + wlasciciel + " osiaga " + predkosc
+    + " km/h";
     return str;
   }
 }
