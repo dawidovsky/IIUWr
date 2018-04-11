@@ -11,6 +11,21 @@ class Wyrazenie
     virtual double oblicz() = 0;
     virtual string opis() = 0;
     virtual int get_prio() = 0;
+    ~Wyrazenie() = default;
+};
+
+class operator1arg : public Wyrazenie
+{
+  public:
+    Wyrazenie *a;
+    ~operator1arg();
+};
+
+class operator2arg : public operator1arg
+{
+  public:
+    Wyrazenie *b;
+    ~operator2arg();
 };
 
 class Liczba : public Wyrazenie
@@ -77,11 +92,9 @@ class Fi : public Stala
     virtual string opis();
 };
 
-class Dodaj : public Wyrazenie
+class Dodaj : public operator2arg
 {
   private:
-    Wyrazenie *a;
-    Wyrazenie *b;
     int priorytet = 1;
 
   public:
@@ -91,11 +104,9 @@ class Dodaj : public Wyrazenie
     virtual string opis();
 };
 
-class Odejmij : public Wyrazenie
+class Odejmij : public operator2arg
 {
   private:
-    Wyrazenie *a;
-    Wyrazenie *b;
     int priorytet = 1;
 
   public:
@@ -105,11 +116,9 @@ class Odejmij : public Wyrazenie
     virtual string opis();
 };
 
-class Mnoz : public Wyrazenie
+class Mnoz : public operator2arg
 {
   private:
-    Wyrazenie *a;
-    Wyrazenie *b;
     int priorytet = 2;
 
   public:
@@ -119,11 +128,9 @@ class Mnoz : public Wyrazenie
     virtual string opis();
 };
 
-class Dziel : public Wyrazenie
+class Dziel : public operator2arg
 {
   private:
-    Wyrazenie *a;
-    Wyrazenie *b;
     int priorytet = 2;
 
   public:
@@ -133,11 +140,9 @@ class Dziel : public Wyrazenie
     virtual string opis();
 };
 
-class Potega : public Wyrazenie
+class Potega : public operator2arg
 {
   private:
-    Wyrazenie *a;
-    Wyrazenie *b;
     int priorytet = 3;
 
   public:
@@ -147,11 +152,9 @@ class Potega : public Wyrazenie
     virtual string opis();
 };
 
-class Log : public Wyrazenie
+class Log : public operator2arg
 {
   private:
-    Wyrazenie *a;
-    Wyrazenie *b;
     int priorytet = 3;
 
   public:
@@ -161,11 +164,9 @@ class Log : public Wyrazenie
     virtual string opis();
 };
 
-class Modulo : public Wyrazenie
+class Modulo : public operator2arg
 {
   private:
-    Wyrazenie *a;
-    Wyrazenie *b;
     int priorytet = 2;
 
   public:
@@ -175,10 +176,9 @@ class Modulo : public Wyrazenie
     virtual string opis();
 };
 
-class Ln : public Wyrazenie
+class Ln : public operator1arg
 {
   private:
-    Wyrazenie *a;
     int priorytet = 5;
 
   public:
@@ -188,10 +188,9 @@ class Ln : public Wyrazenie
     virtual string opis();
 };
 
-class Sin : public Wyrazenie
+class Sin : public operator1arg
 {
   private:
-    Wyrazenie *a;
     int priorytet = 5;
 
   public:
@@ -201,10 +200,9 @@ class Sin : public Wyrazenie
     virtual string opis();
 };
 
-class Cos : public Wyrazenie
+class Cos : public operator1arg
 {
   private:
-    Wyrazenie *a;
     int priorytet = 5;
 
   public:
@@ -214,10 +212,9 @@ class Cos : public Wyrazenie
     virtual string opis();
 };
 
-class Exp : public Wyrazenie
+class Exp : public operator1arg
 {
   private:
-    Wyrazenie *a;
     int priorytet = 5;
 
   public:
@@ -227,10 +224,9 @@ class Exp : public Wyrazenie
     virtual string opis();
 };
 
-class Bezwzgledna : public Wyrazenie
+class Bezwzgledna : public operator1arg
 {
   private:
-    Wyrazenie *a;
     int priorytet = 5;
 
   public:
@@ -240,10 +236,9 @@ class Bezwzgledna : public Wyrazenie
     virtual string opis();
 };
 
-class Przeciwna : public Wyrazenie
+class Przeciwna : public operator1arg
 {
   private:
-    Wyrazenie *a;
     int priorytet = 5;
 
   public:
@@ -253,10 +248,9 @@ class Przeciwna : public Wyrazenie
     virtual string opis();
 };
 
-class Odwrotna : public Wyrazenie
+class Odwrotna : public operator1arg
 {
   private:
-    Wyrazenie *a;
     int priorytet = 5;
 
   public:

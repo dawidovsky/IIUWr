@@ -12,21 +12,21 @@ int main()
   cout << w->opis() << " = " << w->oblicz() << endl;
 
  // jedynka trygonometryczna
-  Wyrazenie *q = new Dodaj(
+  w = new Dodaj(
     new Potega(new Sin(new Liczba(60)),new Liczba(2)),
     new Potega(new Cos(new Liczba(60)),new Liczba(2)));
-  cout << q->opis() << " = " << q->oblicz() << endl;
+  cout << w->opis() << " = " << w->oblicz() << endl;
 
   // logarytm naturalny z e
-  Wyrazenie *e = new Ln(new E());
-  cout << e->opis() << " = " << e->oblicz() << endl;
+  w = new Ln(new E());
+  cout << w->opis() << " = " << w->oblicz() << endl;
 
   // przeciwna, odwrotna, bezwzgledna
-  Wyrazenie *r = new Przeciwna(new Bezwzgledna(new Odwrotna(new Liczba(-0.5))));
-  cout << r->opis() << " = " << r->oblicz() << endl;
+  w = new Przeciwna(new Bezwzgledna(new Odwrotna(new Liczba(-0.5))));
+  cout << w->opis() << " = " << w->oblicz() << endl;
 
   //zmienne
-  Wyrazenie *t =
+  w =
   new Dziel(
     new Mnoz(
       new Odejmij(new Zmienna("x"),new Liczba(1)),
@@ -35,10 +35,10 @@ int main()
     // for(double i=0.0;i<=1.0;i=i+0.01)
     // {
        Zmienna::dodaj_do_wektora("x",3);
-       cout << t->opis() << " = " << t->oblicz() << endl;
+       cout << w->opis() << " = " << w->oblicz() << endl;
     // }
 
-    Wyrazenie *y =
+    w =
     new Odejmij(
       new Dodaj(
         new Liczba(2),
@@ -47,22 +47,22 @@ int main()
         new Mnoz(new Zmienna("y"),new Liczba(3)),
         new Liczba(5)));
 
-      cout << y->opis() << " = " << y->oblicz() << endl;
+    //  cout << w->opis() << " = " << w->oblicz() << endl;
 
     // potęgowania
-    Wyrazenie *u = new Potega(new Liczba(2),
+    w = new Potega(new Liczba(2),
                               new Potega(new Liczba(2),new Liczba(3)));
 
-    cout << u->opis() << " = " << u->oblicz() << endl;
+    cout << w->opis() << " = " << w->oblicz() << endl;
 
     // odejmowanie - problem z prawą stroną
-    Wyrazenie *i = new Odejmij(
+    w = new Odejmij(
                 new Odejmij(new Liczba(1),new Liczba(3)),
                 new Odejmij(new Liczba(1),new Liczba(4)));
 
-    cout << i->opis() << " = " << i->oblicz() << endl;
+    cout << w->opis() << " = " << w->oblicz() << endl;
 
-  Wyrazenie * qw = new Odejmij(new Odejmij(new Liczba(2), new Liczba(3)), new Mnoz(new Liczba(4), new Liczba(5)));
+  w = new Odejmij(new Odejmij(new Liczba(2), new Liczba(3)), new Mnoz(new Liczba(4), new Liczba(5)));
 
-  cout << qw->opis() << " = " << qw->oblicz() << endl;
+  cout << w->opis() << " = " << w->oblicz() << endl;
 }

@@ -34,8 +34,6 @@ string Dodaj::opis()
 {
   string lewa = a->opis();
   string prawa = b->opis();
-  // if(b->get_prio() == priorytet)
-  //   prawa = "(" + prawa + ")";
   return lewa + " + " + prawa;
 }
 
@@ -100,7 +98,7 @@ string Dziel::opis()
   if(a->get_prio() < priorytet)
     lewa = "(" + lewa + ")";
   string prawa = b->opis();
-  if(b->get_prio() < priorytet)
+  if(b->get_prio() <= priorytet)
     prawa = "(" + prawa + ")";
   return lewa + " / " + prawa;
 }
@@ -276,4 +274,14 @@ double Bezwzgledna::oblicz()
 string Bezwzgledna::opis()
 {
   return "|" + a->opis() + "|";
+}
+
+operator1arg::~operator1arg()
+{
+  delete a;
+}
+
+operator2arg::~operator2arg()
+{
+  delete b;
 }

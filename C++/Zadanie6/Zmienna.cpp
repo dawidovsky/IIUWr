@@ -50,5 +50,7 @@ bool Zmienna::czyJest(string x)
 
 double Zmienna::oblicz()
 {
-  return wypisz(nazwa);
+  if(czyJest(nazwa))
+    return wypisz(nazwa);
+  throw "Brak wartosci zmiennej";
 }
