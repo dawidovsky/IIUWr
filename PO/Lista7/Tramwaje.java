@@ -11,11 +11,14 @@ import java.awt.event.*;
 import java.io.*;
 import java.util.Scanner;
 
+// klasa Tramwaje
 public class Tramwaje extends Pojazd implements Serializable
 {
+  // pola
   String numer_id;
   String ilosc_miejsc;
-  
+
+  // konstruktor
   public Tramwaje(String i, String n, String pr)
   {
     numer_id = i;

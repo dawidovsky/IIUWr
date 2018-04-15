@@ -13,9 +13,11 @@ import java.util.Scanner;
 
 public class Samochody extends Pojazd implements Serializable
 {
+  // pola
   String wlasciciel;
   String marka;
 
+  // konstruktor
   public Samochody(String wl, String ma, String pr)
   {
     wlasciciel = wl;

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings("unchecked")
 
+// klasa z obsługą okienka
 public class main
 {
   List<Pojazd> pojazd = new ArrayList<Pojazd>();
@@ -23,14 +24,17 @@ public class main
     main start = new main();
     start.start();
   }
+
   public void start()
   {
+    // tworzenie okienka
     JFrame frame = new JFrame("Edycja pojazdy");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     Container kontener = frame.getContentPane();
     GridLayout layout = new GridLayout(6, 2);
     kontener.setLayout(layout);
 
+    // tekst i pola tekstowe mu odpowiadające
     JLabel imie = new JLabel("Imie(samochod)/Numer_ID(tramwaj)");
     kontener.add(imie);
     JTextField podaj_imie = new JTextField(40);
@@ -51,6 +55,7 @@ public class main
     JTextField jaki = new JTextField(10);
     kontener.add(jaki);
 
+    // przycisk z obługą dodawania elementu do listy
     JButton b = new JButton("Dodaj");
     b.addActionListener(new ActionListener()
     {
@@ -69,7 +74,7 @@ public class main
           System.out.println(w);
           System.out.print("Maksymalnie osiaga ");
           System.out.print(p);
-          System.out.print(" km/h");
+          System.out.print(" km/h\n");
         }
 
         if(c.equals("T"))
@@ -87,6 +92,7 @@ public class main
     });
     kontener.add(b);
 
+    // przycisk odczytujący liste z pliku
     JButton b2 = new JButton("Odczyt");
     b2.addActionListener(new ActionListener()
     {
@@ -122,6 +128,7 @@ public class main
     });
     kontener.add(b2);
 
+    // przycisk zapisujący listę do pliku
     JButton b3 = new JButton("Zapisz");
     b3.addActionListener(new ActionListener()
     {
@@ -145,6 +152,7 @@ public class main
     );
     kontener.add(b3);
 
+    // wyświetlanie okna programu
     frame.pack();
     frame.setVisible(true);
   }

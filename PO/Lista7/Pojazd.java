@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+// klasa dziedziczona przez klase Samochody i Tramwaje
 public abstract class Pojazd implements Serializable
 {
   String predkosc;
