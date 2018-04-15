@@ -7,7 +7,7 @@
 
 (define (op? t)
   (and (list? t)
-       (member (car t) '(+ - * /))))
+       (member (car t) '(+ - * / > < >= <= =))))
 
 (define (op-op e)
   (car e))
@@ -22,7 +22,13 @@
   (cond [(eq? op '+) +]
         [(eq? op '*) *]
         [(eq? op '-) -]
-        [(eq? op '/) /]))
+        [(eq? op '/) /]
+        [(eq? op '=) =]
+        [(eq? op '>) >]
+        [(eq? op '<) <]
+        [(eq? op '<=) <=]
+        [(eq? op '>=) >=]))
+        
 
 (define (let-def? t)
   (and (list? t)
@@ -145,6 +151,14 @@
 (define (cdr-expr e)
   (second e))
 
+(define (exp-pair-pred? e)
+  (and (list? e)
+       (= (length e) 2)
+       (eq? 'pair? (car e))))
+
+(define (exp-pair-expr e)
+  (second e))
+
 ;; lambdas
 
 (define (lambda? t)
@@ -176,6 +190,7 @@
 
 (define (expr? t)
   (or (const? t)
+      (exp-bool? t)
       (and (op? t)
            (andmap expr? (op-args t)))
       (and (let? t)
@@ -191,9 +206,19 @@
            (expr? (cdr-expr t)))
       (and (lambda? t)
            (expr? (lambda-expr t)))
+      (exp-null? t)
+      (and (exp-null-pred? t)
+           (expr? (exp-null-expr t)))
+      (and (exp-pair-pred? t)
+           (expr? (exp-pair-expr t)))
+      (and (if-pred? t)
+           (expr? (if-if t))
+           (expr? (if-true t))
+           (expr? (if-false t)))
       (and (app? t)
            (expr? (app-proc t))
-           (andmap expr? (app-args t)))))
+           (andmap expr? (app-args t)))
+      ))
 
 ;; environments
 
@@ -227,10 +252,81 @@
 (define (closure-env c)
   (cadddr c))
 
+;; null
+
+(define (exp-null? e)
+  (eq? e 'null))
+
+(define (exp-null-pred? e)
+  (and (list? e)
+       (= 2 (length e))
+       (eq? 'null? (car e))))
+
+(define (null-pair-cons e)
+  (list 'null? e))
+
+(define (exp-null-expr e)
+  (second e))
+
+(define (expr-null-cons) 'null)
+
+;; list
+
+(define (expr-list? e)
+  (and (list? e)
+       (> (length e) 0)
+       (eq? 'list (car e))))
+
+(define expr-list-args cdr)
+
+(define (expr-list->cons e)
+  (if (null? e)
+      (expr-null-cons)
+      (cons-cons (car e) (expr-list->cons (cdr e)))))
+
+;; bools
+
+(define (exp-bool? e)
+  (boolean? e))
+
+;; and
+
+(define (and-pred? e)
+  (and (list? e)
+       (> 0 (length e))
+       (eq? 'and (car e))))
+
+;; or
+
+(define (and-pred? e)
+  (and (list? e)
+       (> 0 (length e))
+       (eq? 'or (car e))))
+
+;; if
+
+(define (if-pred? e)
+  (and (list? e)
+       (= (length e) 4)
+       (eq? (car e) 'if)))
+
+(define (if-if e)
+  (second e))
+
+(define (if-true e)
+  (third e))
+
+(define (if-false e)
+  (fourth e))
+
 ;; evaluator
 
 (define (eval-env e env)
   (cond [(const? e) e]
+        [(exp-bool? e) e]
+        [(exp-null? e) null]
+        [(exp-pair-pred? e) (pair? (eval-env (exp-pair-expr e) env))]
+        [(exp-null-pred? e) (null? (eval-env (exp-null-expr e) env))]
         [(op? e)
          (apply (op->proc (op-op e))
                 (map (lambda (a) (eval-env a env))
@@ -242,17 +338,24 @@
         [(cons? e)
          (cons (eval-env (cons-fst e) env)
                (eval-env (cons-snd e) env))]
+        [(expr-list? e)
+         (eval-env (expr-list->cons (expr-list-args e)) env)]
         [(car? e)
          (car (eval-env (car-expr e) env))]
         [(cdr? e)
          (cdr (eval-env (cdr-expr e) env))]
         [(lambda? e)
          (closure-cons (lambda-vars e) (lambda-expr e) env)]
+        [(if-pred? e)
+         (if (eval-env (if-if e) env)
+             (eval-env (if-true e) env)
+             (eval-env (if-false e) env))]
         [(app? e)
          (apply-closure
            (eval-env (app-proc e) env)
            (map (lambda (a) (eval-env a env))
-                (app-args e)))]))
+                (app-args e)))]
+        ))
 
 (define (apply-closure c args)
   (eval-env (closure-expr c)
@@ -278,8 +381,3 @@
 
 (define (eval e)
   (eval-env e empty-env))
-
-(eval '(let (x 5) (lambda (z) (let (y 5) (+ x y z)))))
-(eval '(let (x 5) (lambda (x) (let (y 5) (+ x y)))))
-(eval '((lambda (x) (lambda (y) (+ x y))) 10))
-(eval '(let (y 3) ((lambda (x) (+ x y))2)))
