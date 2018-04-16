@@ -1,8 +1,8 @@
 #lang racket
 
-;; ##################################################################
-;; ## WSPÓLNA PRACA - Dawid Paluszak , Szymon Miler, Patryk Wilusz ##
-;; ##################################################################
+;; ###################################################################
+;; ## WSPÓLNA PRACA - Dawid Paluszak , Szymon Miler , Patryk Wilusz ##
+;; ###################################################################
 
 ;; expressions
 
@@ -130,18 +130,17 @@
 
 ;; procedura łączy listę letów i usuwa z niej nulle
 (define (let-lift-concat structs)
-  (remove-nulls (concatMap (map let-lift-lets structs))))
+  (remove-nulls (concatMap let-lift-lets structs)))
 
 ;; procedura usuwająca nulle z list
 (define (remove-nulls s) 
   (filter-map (lambda (a) (if (null? a) #f a)) s))
 
-(define (concatMap list)
-  (define (concat res acc)
-    (if (null? res)
-        acc
-        (concat (cdr res) (append acc (car res)))))
-  (concat list null))
+;; procedura z "Szablon do zadania o hetmanach (queens.rkt)"
+(define (concatMap f xs)
+  (if (null? xs)
+      null
+      (append (f (car xs)) (concatMap f (cdr xs)))))
 
 ;; procedura map z iteratorem  
 (define (map-with-iterator proc l i)
@@ -187,15 +186,15 @@
                   [new-env (add-to-env var-from-let-def fresh-var env)]
                   [SI-expr (let-lift-iter (let-expr res) new-env (SI-iter SI-def-expr))]
                   [expressions (SI-let-lift SI-expr)]
-                  [lets (remove-nulls (concatMap (list (let-lift-lets expr-from-def)
-                                                       (list (let-def-cons fresh-var (let-lift-exprs expr-from-def)))
-                                                       (let-lift-lets expressions))))])
+                  [lets (remove-nulls (append (let-lift-lets expr-from-def)
+                                              (list (let-def-cons fresh-var (let-lift-exprs expr-from-def)))
+                                              (let-lift-lets expressions)))])
              ;; tworzenie struktury z iteratorem
              ;; pierwszy argument - struktura let-lift z definicjami letów i 
              ;; wyrażeniem z let'a
              ;; drugi argument - iterator                                  
              (SI-cons (let-lift-cons lets
-                                  (let-lift-exprs expressions)) (SI-iter SI-expr)))]))
+                                     (let-lift-exprs expressions)) (SI-iter SI-expr)))]))
   
   (let-lift->let (SI-let-lift (let-lift-iter e empty-env 0))))
 
@@ -252,29 +251,29 @@
          (expr8 '(+ (+ 3 4) (* 2 4)))
          (expr9 '(+ (let (x (let (y 4) (+ y 4))) (+ 3 x)) (let (x (let (y 4) (+ y 4))) (+ 3 x)))))
          
-  (let ((tests(list test1 test2 test3 test4
-                    test5 test7 test8
-                    test9 test10))
-        (tests2(list expr1 expr2 expr3
-                     expr4 expr5 expr6
-                     expr7 expr8 expr9)))
+    (let ((tests(list test1 test2 test3 test4
+                      test5 test7 test8
+                      test9 test10))
+          (tests2(list expr1 expr2 expr3
+                       expr4 expr5 expr6
+                       expr7 expr8 expr9)))
     
-    (display "Czy przemianowane lety spełniają predykat let-lifted-expr?\n")
-    (display (map (lambda (a) (let-lifted-expr?  a)) tests))
-    (newline)
+      (display "Czy przemianowane lety spełniają predykat let-lifted-expr?\n")
+      (display (map (lambda (a) (let-lifted-expr?  a)) tests))
+      (newline)
     
-    (display "Czy dają te same wyniki?\n")
-    (let ((toplevellet-list (map (lambda (x) (eval x)) tests))
-          (let-list (map (lambda (y) (eval y)) tests2)))
+      (display "Czy dają te same wyniki?\n")
+      (let ((toplevellet-list (map (lambda (x) (eval x)) tests))
+            (let-list (map (lambda (y) (eval y)) tests2)))
       
-    (display toplevellet-list)
-    (newline)
-    (display let-list)
-    (newline)
-    (equal? toplevellet-list let-list)))))
+        (display toplevellet-list)
+        (newline)
+        (display let-list)
+        (newline)
+        (equal? toplevellet-list let-list)))))
     
 (test)
 
-;; ##################################################################
-;; ## WSPÓLNA PRACA - Dawid Paluszak , Szymon Miler, Patryk Wilusz ##
-;; ##################################################################
+;; ###################################################################
+;; ## WSPÓLNA PRACA - Dawid Paluszak , Szymon Miler , Patryk Wilusz ##
+;; ###################################################################
