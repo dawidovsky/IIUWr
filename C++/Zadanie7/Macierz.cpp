@@ -152,6 +152,59 @@ Macierz & Macierz::operator *= (const Macierz &m)
   return *this;
 }
 
+void Macierz::zamienW(int x, int y)
+{
+  swap(this->macierz[x],this->macierz[y]);
+}
+
+void Macierz::zamienK(int x, int y)
+{
+  for(int i = 0 ; i < this->wiersze ; i++)
+    swap(this->macierz[i][x],this->macierz[i][y]);
+}
+
+void Macierz::mnozW(int x, int skalar)
+{
+  if(skalar == 0)
+    throw "nie mozna razy 0";
+  for(int i=0;i<this->kolumny;i++)
+  {
+    this->macierz[x][i] *= skalar;
+  }
+}
+
+void Macierz::mnozK(int x, int skalar)
+{
+  if(skalar == 0)
+    throw "nie mozna razy 0";
+  for(int i=0;i<this->wiersze;i++)
+  {
+    this->macierz[i][x] *= skalar;
+  }
+}
+
+void Macierz::dodajW(int x,int y)
+{
+  for(int i=0;i<this->kolumny;i++)
+  {
+    this->macierz[x][i] += this->macierz[y][i];
+  }
+}
+
+void Macierz::dodajK(int x,int y)
+{
+  for(int i=0;i<this->wiersze;i++)
+  {
+    this->macierz[i][x] += this->macierz[i][y];
+  }
+}
+
+Macierz Macierz::usunWK(int x, int y)
+{
+  Macierz wynik(this->wiersze-1,this->kolumny-1);
+  for()
+}
+
 Macierz::~Macierz()
 {
   for(int i = 0 ; i < wiersze ; i++)

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <ostream>
-
+#include <algorithm>
 
 using namespace std;
 
@@ -34,4 +34,12 @@ class Macierz
 
     Macierz operator * (const Macierz &m);
     Macierz & operator *= (const Macierz &m);
+
+    void zamienW(int x, int y);
+    void zamienK(int x, int y);
+    void mnozW(int x, int skalar);
+    void mnozK(int x, int skalar);
+    void dodajW(int x, int y);
+    void dodajK(int x, int y);
+    Macierz usunWK(int x, int y);
 };
