@@ -31,6 +31,35 @@ Macierz::Macierz(int m, int n)
   }
 }
 
+Macierz::Macierz(const Macierz &mac)
+{
+  wiersze = mac.wiersze;
+  kolumny = mac.kolumny;
+  macierz = new double *[wiersze];
+  for(int i = 0 ; i < wiersze ; i++)
+  {
+    macierz[i] = new double [kolumny];
+    for(int j = 0; j < kolumny ; j++)
+        macierz[i][j] = mac.macierz[i][j];
+  }
+}
+
+Macierz::Macierz(Macierz &&mac)
+{
+  wiersze = mac.wiersze;
+  kolumny = mac.kolumny;
+  macierz = new double *[wiersze];
+  for(int i = 0 ; i < wiersze ; i++)
+  {
+    macierz[i] = new double [kolumny];
+    for(int j = 0; j < kolumny ; j++)
+        macierz[i][j] = mac.macierz[i][j];
+  }
+  mac.wiersze = 0;
+  mac.kolumny = 0;
+  mac.macierz = nullptr;
+}
+
 ostream& operator << (ostream& wy, const Macierz& mac)
 {
   for(int i = 0 ; i < mac.wiersze ; i++ )
@@ -54,7 +83,11 @@ Macierz& Macierz::operator = (const Macierz &mac)
 {
     wiersze = mac.wiersze;
     kolumny = mac.kolumny;
-    macierz = mac.macierz;
+    for(int i = 0 ; i < wiersze ; i++)
+    {
+      for(int j = 0; j < kolumny ; j++)
+          macierz[i][j] = mac.macierz[i][j];
+    }
     return *this;
 }
 
@@ -62,7 +95,11 @@ Macierz& Macierz::operator = (Macierz &&mac)
 {
     wiersze = mac.wiersze;
     kolumny = mac.kolumny;
-    macierz = mac.macierz;
+    for(int i = 0 ; i < wiersze ; i++)
+    {
+      for(int j = 0; j < kolumny ; j++)
+          macierz[i][j] = mac.macierz[i][j];
+    }
     mac.wiersze = 0;
     mac.kolumny = 0;
     mac.macierz = nullptr;
@@ -142,13 +179,19 @@ Macierz & Macierz::operator *= (const Macierz &m)
 {
   if(this->wiersze != m.kolumny)
     throw "rozmiary_nie_pasuja";
-  Macierz wynik(*this);
+  Macierz wynik(this->wiersze, this->kolumny);
+  double suma = 0;
   for(int i = 0; i < this->wiersze; i++)
     for(int j = 0; j < m.kolumny; j++)
+    {
+      suma = 0;
       for(int k = 0; k < this->kolumny; k++)
       {
-        this->macierz[i][j] += wynik.macierz[i][k] * m.macierz[k][j];
+        suma += this->macierz[i][k] * m.macierz[k][j];
       }
+      wynik.macierz[i][j] = suma;
+    }
+  *this = move(wynik);
   return *this;
 }
 
@@ -199,10 +242,40 @@ void Macierz::dodajK(int x,int y)
   }
 }
 
+Macierz Macierz::usunW(int x)
+{
+  Macierz nowa(this->wiersze - 1,this->kolumny);
+  for(int i=0,j=0;i<this->wiersze;i++,j++)
+  {
+    if(i==x)
+      j--;
+    else
+      nowa.macierz[j] = this->macierz[i];
+  }
+  return nowa;
+}
+
+Macierz Macierz::usunK(int y)
+{
+  Macierz nowa(this->wiersze,this->kolumny - 1);
+  for(int i=0;i<this->wiersze;i++)
+  {
+    for(int j=0,k=0;j<this->kolumny;j++,k++)
+    {
+      if(j==y)
+        k--;
+      else
+        nowa.macierz[i][k] = this->macierz[i][j];
+    }
+  }
+  return nowa;
+}
+
 Macierz Macierz::usunWK(int x, int y)
 {
-  Macierz wynik(this->wiersze-1,this->kolumny-1);
-  for()
+  Macierz bezw = this->usunW(x);
+  Macierz nowa = bezw.usunK(y);
+  return nowa;
 }
 
 Macierz::~Macierz()

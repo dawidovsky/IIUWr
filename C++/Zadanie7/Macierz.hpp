@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ostream>
 #include <algorithm>
+#include <exception>
 
 using namespace std;
 
@@ -14,8 +15,8 @@ class Macierz
   public:
     Macierz(int n);
     Macierz(int m, int n);
-    Macierz(const Macierz &mac) = default;
-    Macierz(Macierz &&mac) = default;
+    Macierz(const Macierz &mac);
+    Macierz(Macierz &&mac);
     ~Macierz();
 
     friend istream & operator >> (istream &we, Macierz &mac);
@@ -42,4 +43,6 @@ class Macierz
     void dodajW(int x, int y);
     void dodajK(int x, int y);
     Macierz usunWK(int x, int y);
+    Macierz usunW(int x);
+    Macierz usunK(int y);
 };
