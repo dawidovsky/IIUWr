@@ -25,11 +25,11 @@ class Macierz
     Macierz & operator = (const Macierz &tb);
     Macierz & operator = (Macierz &&tb);
 
-    Macierz operator * (int skalar);
+    Macierz operator * (double skalar);
     Macierz operator + (const Macierz &m2);
     Macierz operator - (const Macierz &m2);
 
-    Macierz & operator *= (int skalar);
+    Macierz & operator *= (double skalar);
     Macierz & operator += (const Macierz &mac);
     Macierz & operator -= (const Macierz &mac);
 
@@ -45,4 +45,29 @@ class Macierz
     Macierz usunWK(int x, int y);
     Macierz usunW(int x);
     Macierz usunK(int y);
+    Macierz transpozycja();
+};
+
+class SkalarNieZero : public exception
+{
+  private:
+    string tresc;
+  public:
+    SkalarNieZero();
+    SkalarNieZero(const SkalarNieZero &c) = default;
+    SkalarNieZero & operator = (const SkalarNieZero &tb) = default;
+    virtual const string what();
+    virtual ~SkalarNieZero() = default;
+};
+
+class RozmiaryNiePasuja : public exception
+{
+private:
+  string tresc;
+public:
+  RozmiaryNiePasuja();
+  RozmiaryNiePasuja(const RozmiaryNiePasuja &c) = default;
+  RozmiaryNiePasuja & operator = (const RozmiaryNiePasuja &tb) = default;
+  string what();
+  virtual ~RozmiaryNiePasuja() = default;
 };

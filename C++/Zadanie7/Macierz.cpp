@@ -1,5 +1,25 @@
 #include "Macierz.hpp"
 
+SkalarNieZero::SkalarNieZero()
+{
+  tresc = "Skalar nie moze byc rowny 0!";
+}
+
+const string SkalarNieZero::what()
+{
+  return tresc;
+}
+
+RozmiaryNiePasuja::RozmiaryNiePasuja()
+{
+  tresc = "Rozmiary macierzy nie sa zgodne";
+}
+
+string RozmiaryNiePasuja::what()
+{
+  return tresc;
+}
+
 Macierz::Macierz(int n)
 {
   kolumny = n;
@@ -106,7 +126,7 @@ Macierz& Macierz::operator = (Macierz &&mac)
     return *this;
 }
 
-Macierz Macierz::operator * (int skalar)
+Macierz Macierz::operator * (double skalar)
 {
   Macierz wynik(this->wiersze,this->kolumny);
   for(int i = 0 ; i < this->wiersze ; i++)
@@ -118,7 +138,7 @@ Macierz Macierz::operator * (int skalar)
 Macierz Macierz::operator + (const Macierz &m2)
 {
   if(this->wiersze != m2.wiersze || this->kolumny != m2.kolumny)
-    throw "rozmiary_nie_pasuja";
+    throw new RozmiaryNiePasuja();
   Macierz wynik(m2.wiersze,m2.kolumny);
   for(int i = 0 ; i < m2.wiersze ; i++)
     for(int j = 0; j < m2.kolumny ; j++)
@@ -129,7 +149,7 @@ Macierz Macierz::operator + (const Macierz &m2)
 Macierz Macierz::operator - (const Macierz &m2)
 {
   if(this->wiersze != m2.wiersze || this->kolumny != m2.kolumny)
-    throw "rozmiary_nie_pasuja";
+    throw new RozmiaryNiePasuja();
   Macierz wynik(m2.wiersze,m2.kolumny);
   for(int i = 0 ; i < m2.wiersze ; i++)
     for(int j = 0; j < m2.kolumny ; j++)
@@ -137,7 +157,7 @@ Macierz Macierz::operator - (const Macierz &m2)
   return wynik;
 }
 
-Macierz & Macierz::operator *= (int skalar)
+Macierz & Macierz::operator *= (double skalar)
 {
   for(int i = 0 ; i < this->wiersze ; i++)
     for(int j = 0; j < this->kolumny ; j++)
@@ -164,7 +184,7 @@ Macierz & Macierz::operator -= (const Macierz &mac)
 Macierz Macierz::operator * (const Macierz &m)
 {
   if(this->wiersze != m.kolumny)
-    throw "rozmiary_nie_pasuja";
+    throw new RozmiaryNiePasuja();
   Macierz wynik(m.wiersze,m.kolumny);
   for(int i = 0; i < this->wiersze; i++)
     for(int j = 0; j < m.kolumny; j++)
@@ -178,7 +198,7 @@ Macierz Macierz::operator * (const Macierz &m)
 Macierz & Macierz::operator *= (const Macierz &m)
 {
   if(this->wiersze != m.kolumny)
-    throw "rozmiary_nie_pasuja";
+    throw new RozmiaryNiePasuja();
   Macierz wynik(this->wiersze, this->kolumny);
   double suma = 0;
   for(int i = 0; i < this->wiersze; i++)
@@ -209,7 +229,7 @@ void Macierz::zamienK(int x, int y)
 void Macierz::mnozW(int x, int skalar)
 {
   if(skalar == 0)
-    throw "nie mozna razy 0";
+    throw new SkalarNieZero();
   for(int i=0;i<this->kolumny;i++)
   {
     this->macierz[x][i] *= skalar;
@@ -219,7 +239,7 @@ void Macierz::mnozW(int x, int skalar)
 void Macierz::mnozK(int x, int skalar)
 {
   if(skalar == 0)
-    throw "nie mozna razy 0";
+    throw new SkalarNieZero();
   for(int i=0;i<this->wiersze;i++)
   {
     this->macierz[i][x] *= skalar;
@@ -275,6 +295,17 @@ Macierz Macierz::usunWK(int x, int y)
 {
   Macierz bezw = this->usunW(x);
   Macierz nowa = bezw.usunK(y);
+  return nowa;
+}
+
+Macierz Macierz::transpozycja()
+{
+  Macierz nowa(this->wiersze, this->kolumny);
+  for(int i=0;i<this->wiersze;i++)
+    for(int j=0;j<this->kolumny;j++)
+    {
+      nowa.macierz[i][j] = this->macierz[j][i];
+    }
   return nowa;
 }
 
