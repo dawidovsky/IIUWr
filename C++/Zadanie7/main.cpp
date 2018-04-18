@@ -1,5 +1,7 @@
 #include "Macierz.hpp"
 
+using namespace obliczenia;
+
 int main()
 {
   Macierz mdia(5);
@@ -8,12 +10,4 @@ int main()
   cout << mdia << endl << endl;
   Macierz nowa = mdia.usunWK(1,2);
   cout << nowa << endl << endl;
-  try
-  {
-    nowa.mnozK(1,0);
-  }
-  catch(SkalarNieZero &ex)
-  {
-    cout << ex.what();
-  }
 }

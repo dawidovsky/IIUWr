@@ -1,23 +1,35 @@
 #include "Macierz.hpp"
 
-SkalarNieZero::SkalarNieZero()
+using namespace obliczenia;
+
+SkalarNieZero::SkalarNieZero(const char* t)
 {
-  tresc = "Skalar nie moze byc rowny 0!";
+  tresc = t;
 }
 
-const string SkalarNieZero::what()
+const char* SkalarNieZero::what()
 {
-  return tresc;
+  return tresc.c_str();
 }
 
-RozmiaryNiePasuja::RozmiaryNiePasuja()
+RozmiaryNiePasuja::RozmiaryNiePasuja(const char* t)
 {
-  tresc = "Rozmiary macierzy nie sa zgodne";
+  tresc = t;
 }
 
-string RozmiaryNiePasuja::what()
+const char* RozmiaryNiePasuja::what()
 {
-  return tresc;
+  return tresc.c_str();
+}
+
+Brak::Brak(const char* t)
+{
+  tresc = t;
+}
+
+const char* Brak::what()
+{
+  return tresc.c_str();
 }
 
 Macierz::Macierz(int n)
@@ -80,24 +92,11 @@ Macierz::Macierz(Macierz &&mac)
   mac.macierz = nullptr;
 }
 
-ostream& operator << (ostream& wy, const Macierz& mac)
-{
-  for(int i = 0 ; i < mac.wiersze ; i++ )
-  {
-    for(int j = 0 ; j < mac.kolumny ; j++)
-      wy << mac.macierz[i][j] << " ";
-    wy << endl;
-  }
-  return wy;
-}
+//ostream& operator << (ostream& wy, const Macierz& mac)
 
-istream & operator >> (istream &we , Macierz &mac)
-{
-  for(int i = 0 ; i < mac.wiersze ; i++)
-    for(int j = 0; j < mac.kolumny ; j++)
-      we >> mac.macierz[i][j];
-  return we;
-}
+
+//istream & operator >> (istream &we , Macierz &mac)
+
 
 Macierz& Macierz::operator = (const Macierz &mac)
 {
@@ -184,7 +183,7 @@ Macierz & Macierz::operator -= (const Macierz &mac)
 Macierz Macierz::operator * (const Macierz &m)
 {
   if(this->wiersze != m.kolumny)
-    throw new RozmiaryNiePasuja();
+    throw new RozmiaryNiePasuja("Rozmiary nie pasuja");
   Macierz wynik(m.wiersze,m.kolumny);
   for(int i = 0; i < this->wiersze; i++)
     for(int j = 0; j < m.kolumny; j++)
@@ -198,7 +197,7 @@ Macierz Macierz::operator * (const Macierz &m)
 Macierz & Macierz::operator *= (const Macierz &m)
 {
   if(this->wiersze != m.kolumny)
-    throw new RozmiaryNiePasuja();
+    throw new RozmiaryNiePasuja("Rozmiary nie pasuja");
   Macierz wynik(this->wiersze, this->kolumny);
   double suma = 0;
   for(int i = 0; i < this->wiersze; i++)
@@ -229,7 +228,7 @@ void Macierz::zamienK(int x, int y)
 void Macierz::mnozW(int x, int skalar)
 {
   if(skalar == 0)
-    throw new SkalarNieZero();
+    throw new SkalarNieZero("Skalar nie moze byc 0");
   for(int i=0;i<this->kolumny;i++)
   {
     this->macierz[x][i] *= skalar;
@@ -239,7 +238,7 @@ void Macierz::mnozW(int x, int skalar)
 void Macierz::mnozK(int x, int skalar)
 {
   if(skalar == 0)
-    throw new SkalarNieZero();
+    throw new SkalarNieZero("Skalar nie moze byc 0");
   for(int i=0;i<this->wiersze;i++)
   {
     this->macierz[i][x] *= skalar;
@@ -293,6 +292,10 @@ Macierz Macierz::usunK(int y)
 
 Macierz Macierz::usunWK(int x, int y)
 {
+  if(x >= this->kolumny)
+    throw new Brak("Brak takiej kolumny");
+  if(y >= this->wiersze)
+    throw new Brak("Brak takiego wiersza");
   Macierz bezw = this->usunW(x);
   Macierz nowa = bezw.usunK(y);
   return nowa;
