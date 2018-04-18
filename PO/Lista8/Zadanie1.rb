@@ -9,58 +9,57 @@ class Fixnum
         end
     end
     def czynniki
-        @@rezultat = []
-        @@licznik = 0
+        rezultat = []
+        licznik = 0
         for i in 1..self do
             if self % i == 0
-                @@rezultat[@@licznik] = i
-                @@licznik += 1
+                rezultat[licznik] = i
+                licznik += 1
                 end
         end
-        @@rezultat
+        rezultat
     end
     def doskonala
-        @@resultat = 0
+        resultat = 0
         for i in self.czynniki do
             if self != i
-                @@resultat += i
+                resultat += i
             end
         end
-        @@resultat == self
+        resultat == self
     end
 
     def slownie
-        @@rezultate = ''
+        rezultate = ''
         for i in 0...self.to_s.length do
             case self.to_s[i]
             when '0'
-                @@rezultate << ' zero'
+                rezultate << ' zero'
             when '1'
-                @@rezultate << ' jeden'
+                rezultate << ' jeden'
             when '2'
-                @@rezultate << ' dwa'
+                rezultate << ' dwa'
             when '3'
-                @@rezultate << ' trzy'
+                rezultate << ' trzy'
             when '4'
-                @@rezultate << ' cztery'
+                rezultate << ' cztery'
             when '5'
-                @@rezultate << ' piec'
+                rezultate << ' piec'
             when '6'
-                @@rezultate << ' szesc'
+                rezultate << ' szesc'
             when '7'
-                @@rezultate << ' siedem'
+                rezultate << ' siedem'
             when '8'
-                @@rezultate << ' osiem'
+                rezultate << ' osiem'
             when '9'
-                @@rezultate << ' dziewiec'
+                rezultate << ' dziewiec'
             end
         end
-        @@rezultate
+        rezultate
     end
 end
 
-puts "ackerman od 2 = #{2.ack(1)}"
-puts "czynniki 6 to #{6.czynniki}"
-puts "doskonalosc liczby 7 #{7.doskonala}"
-puts "ona musi 6 #{6.doskonala}"
-puts "slownie liczba 42 =#{42.slownie}"
+puts "Ackerman od 2 = #{2.ack(1)}"
+puts "Czynniki 6 to #{6.czynniki}"
+puts "Czy 6 jest doskonala - #{6.doskonala}"    # 1 + 2 + 3 = 6 (dzielniki = liczba)
+puts "Slownie liczba 42 to #{42.slownie}"
