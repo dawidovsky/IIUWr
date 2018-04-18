@@ -1,3 +1,10 @@
+// Dawid Paluszak
+// Pracownia PO, czwartek, s. 108
+// L7, z1, Program okienkowy - Pojazdy
+// main
+// DodajListy.java
+// 2018-04-12
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -6,6 +13,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+// dodawanie do listy
 public class DodajListy extends Pojazd implements ActionListener
 {
   String w;

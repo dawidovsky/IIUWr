@@ -1,3 +1,9 @@
+// Dawid Paluszak
+// Pracownia PO, czwartek, s. 108
+// L7, z1, Program okienkowy - Pojazdy
+// main
+// Odczyt.java
+// 2018-04-12
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +15,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings("unchecked")
 
+// Odczyt z pliku
 class Odczyt extends Pojazd implements ActionListener
 {
   public void actionPerformed(ActionEvent e)
