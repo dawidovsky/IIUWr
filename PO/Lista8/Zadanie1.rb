@@ -1,4 +1,12 @@
+# Dawid Paluszak
+# Pracownia PO, czwartek, s. 108
+# L8, z1, Rozszerzenie FixNum
+# Zadanie1.rb
+# Zadanie1.rb
+# 2018-04-19
+
 class Fixnum
+  # liczenie ackermana
     def ack (m)
         if self==0
             m+1
@@ -8,6 +16,7 @@ class Fixnum
             (self-1).ack(self.ack(m-1))
         end
     end
+    # wyliczanie czynników
     def czynniki
         rezultat = []
         licznik = 0
@@ -19,6 +28,7 @@ class Fixnum
         end
         rezultat
     end
+    # sprawdzanie czy liczba jest doskonała
     def doskonala
         resultat = 0
         for i in self.czynniki do
@@ -28,38 +38,38 @@ class Fixnum
         end
         resultat == self
     end
-
+    # zapisywanie liczb słownie w sposób prosty
     def slownie
-        rezultate = ''
+        rezultat = ''
         for i in 0...self.to_s.length do
             case self.to_s[i]
             when '0'
-                rezultate << ' zero'
+                rezultat << ' zero'
             when '1'
-                rezultate << ' jeden'
+                rezultat << ' jeden'
             when '2'
-                rezultate << ' dwa'
+                rezultat << ' dwa'
             when '3'
-                rezultate << ' trzy'
+                rezultat << ' trzy'
             when '4'
-                rezultate << ' cztery'
+                rezultat << ' cztery'
             when '5'
-                rezultate << ' piec'
+                rezultat << ' piec'
             when '6'
-                rezultate << ' szesc'
+                rezultat << ' szesc'
             when '7'
-                rezultate << ' siedem'
+                rezultat << ' siedem'
             when '8'
-                rezultate << ' osiem'
+                rezultat << ' osiem'
             when '9'
-                rezultate << ' dziewiec'
+                rezultat << ' dziewiec'
             end
         end
-        rezultate
+        rezultat
     end
 end
 
 puts "Ackerman od 2 = #{2.ack(1)}"
 puts "Czynniki 6 to #{6.czynniki}"
-puts "Czy 6 jest doskonala - #{6.doskonala}"    # 1 + 2 + 3 = 6 (dzielniki = liczba)
+puts "Czy 6 jest doskonala - #{28.doskonala}"    # 1 + 2 + 3 = 6 (dzielniki = liczba)
 puts "Slownie liczba 42 to #{42.slownie}"

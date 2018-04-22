@@ -1,7 +1,15 @@
+# Dawid Paluszak
+# Pracownia PO, czwartek, s. 108
+# L8, z3, Szyfrowanie
+# Zadanie3.rb
+# Zadanie3.rb
+# 2018-04-19
+
 class Jawna
   def initialize(nazwa,klucz)
     @nazwa = nazwa
     @klucz = klucz
+    # deszyfrowanie
     for i in 0...@nazwa.length
       @nazwa[i] = @klucz.invert[@nazwa[i]]
     end
@@ -18,6 +26,7 @@ class Zaszyfrowane
   def initialize(nazwa,klucz)
     @nazwa = nazwa
     @klucz = klucz
+    # szyfrowanie
     for i in 0...@nazwa.length
       @nazwa[i] = @klucz[@nazwa[i]]
     end
