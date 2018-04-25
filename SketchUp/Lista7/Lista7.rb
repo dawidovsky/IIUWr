@@ -20,11 +20,17 @@ def count_words(n)
 end
 
 def same23?(n)
-  if(n.count != 5)
-    return false
+  a = b = c = 0
+  for i in n
+    if(i == 'a')
+        a += 1
+    elsif(i == 'b')
+      b += 1
+    else
+      c += 1
+    end
   end
-  n.sort!
-  (n[0] == n[1] and n[0] == n[2] and n[3] == n[4] and n[0] != n[4]) or (n[0] == n[1] and n[2] == n[3] and n[2] == n[4] and n[0] != n[4])
+  ((a == 3 &&( b == 2 || c == 2)) || (b == 3 && (a == 2 || c == 2)) || (c == 3 && (b == 2 || a == 2)))
 end
 
 class Testing < Test::Unit::TestCase
