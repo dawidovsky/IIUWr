@@ -87,5 +87,8 @@
                    (rename-st (node-right t)))]))
   (res-val ((rename-st t) 0)))
 
-
+(define (rand  max)
+  (lambda (seed)
+    (let ([v (modulo  (+ (*  1103515245  seed) 12345) (expt 2 32))])
+      (res (modulo v max) v))))
 
