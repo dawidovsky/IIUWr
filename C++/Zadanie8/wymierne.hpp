@@ -14,22 +14,19 @@ namespace obliczenia
     public:
       int get_l() const {return licz;};
       int get_m() const {return mian;};
-      void set_l(int x) {licz = x;};
-      void set_m(int x) {mian = x;};
       Wymierna(int, int);
       Wymierna(int);
       Wymierna(const Wymierna &) = default;
       Wymierna & operator = (const Wymierna &) = default;
-      friend ostream & operator << (ostream & wy, const Wymierna & x)
-      {
-        return wy << (double) x.get_l() / x.get_m();
-      };
+      friend ostream & operator << (ostream & wy, const Wymierna & x);
 
+    private:
       Skroc();
       int Skroc(int64_t, int64_t);
       NWD(int, int);
       NWW(int, int);
 
+    public:
       Wymierna & operator + (const Wymierna &);
       Wymierna & operator - (const Wymierna &);
       Wymierna & operator * (const Wymierna &);
@@ -40,6 +37,7 @@ namespace obliczenia
 
       operator double();
       explicit operator int();
+
   };
 }
 

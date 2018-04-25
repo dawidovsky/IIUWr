@@ -9,16 +9,17 @@ int main()
     Wymierna w1(1,2);
     Wymierna w2(3,4);
     cout << "1/2 + 3/4 = ";
-    cout << w1 + w2 << endl;
-    cout << "1/2 - 3/4 = ";
-    cout << w1 - w2 << endl;
-    cout << "1/2 * 3/4 = ";
-    cout << w1 * w2 << endl;
-    cout << "1/2 / 3/4 = ";
-    cout << w1 / w2 << endl;
-    cout << "1/2 ze zmienionym znakiem: " << -w1 << endl;
-    cout << "-1/2 odwrotna: " << !w1 << endl;
-    Wymierna zero(1,0);
+    Wymierna w3 = w1 + w2;
+    cout << w3 << endl;
+    Wymierna w4(1,3);
+    cout << "1/3 = " << w4 << endl;
+    w3 = w1 - w2;
+    cout << "1/2 - 3/4 = " << w3 << endl;
+    w3 = w1 * w2;
+    cout << "1/2 * 3/4 = " << w3 << endl;
+    w3 = w1 / w2;
+    cout << "1/2 / 3/4 = " << w3 << endl;
+    Wymierna w5(1,0);
   }
 
   catch(NieDzielPrzezZero &er)
