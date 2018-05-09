@@ -41,7 +41,8 @@
 
 (define (op? t)
   (and (list? t)
-       (member (car t) '(+ - * / = > >= < <=))))
+       (> (length t) 0)
+       (member (car t) '(+ - * / = > >= < <= %))))
 
 (define (op-op e)
   (car e))
@@ -55,6 +56,7 @@
         [(eq? op '-) -]
         [(eq? op '/) /]
         [(eq? op '=) =]
+        [(eq? op '%) modulo]
         [(eq? op '>) >]
         [(eq? op '>=) >=]
         [(eq? op '<)  <]
@@ -109,6 +111,38 @@
 (define (block? t)
   (list? t))
 
+(define (post++? t)
+  (and (list? t)
+       (= (length t) 2)
+       (eq? '++ (second t))
+       ))
+
+(define (post-var++ t)
+  (first t))
+
+(define (pre++? t)
+  (and (list? t)
+       (= (length t) 2)
+       (eq? '++ (first t))))
+
+(define (pre-var++ t)
+  (second t))
+
+(define (for? t)
+  (tagged-tuple? 'for 5 t))
+
+(define (for-assign t)
+  (second t))
+
+(define (for-cond t)
+  (third t))
+
+(define (for-inc t)
+  (fourth t))
+
+(define (for-body t)
+  (fifth t))
+
 ;;
 
 (define (eval e m)
@@ -125,6 +159,19 @@
          (if (eval-arith (while-cond e) m)
              (eval e (eval (while-expr e) m))
              m)]
+        [(for? e)
+         (eval (list (for-assign e)
+                     (list 'while (for-cond e) (list (for-body e) (for-inc e)))) m)]
+        [(post++? e)
+         (set-mem
+          (post-var++ e)
+          (+ (get-mem (post-var++ e) m) 1)
+          m)]
+        [(pre++? e)
+         (set-mem
+          (pre-var++ e)
+          (+ (get-mem (pre-var++ e) m) 1)
+          m)]
         [(block? e)
          (if (null? e)
              m
@@ -139,9 +186,46 @@
   '( (i := 10)
      (r := 1)
      (while (> i 0)
-       ( (r := (* i r))
-         (i := (- i 1)) ))))
+            ( (r := (* i r))
+              (i := (- i 1)) ))))
 
 (define (computeFact10)
   (run fact10))
-        
+
+(define (fib n)
+  `( (i := ,n)
+     (f1 := 0)
+     (f2 := 1)
+     (while (> i 0)
+            ((temp := f2)
+             (f2 := (+ f1 f2))
+             (f1 := temp)
+             (i := (- i 1))))))
+
+(define (computefib n)
+  (run (fib n)))
+
+(define (prime n)
+  `( (n := ,n)
+     (i := 2)
+     (sum := 0)
+     (while (> n 0)
+            ((divs := 0)
+             (j := 2)
+             (while (<= (* j j) i)
+                    ((if (= (% i j) 0)
+                         (divs := (+ divs 1))
+                         '())
+                     (j := (+ j 1)))
+                    (if (> divs 0)
+                        '()
+                        (sum := (+ sum i))
+                        (n := (- n 1))
+                        (i := (+ i 1))))))))
+
+(define (primes n)
+  (run (prime n)))
+
+;; (run '( (while := 5)
+;;         (while (> while -1)
+;;                 ( (while := (- while 1))))))
