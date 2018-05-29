@@ -1,0 +1,41 @@
+; FLTK preferences file format 1.0
+; vendor: Brighter3D
+; application: unknown
+
+[.]
+
+PrimaryFotons:64
+EnvFotons:0
+Caustics:0
+DirectFotons:32
+Gamma:2.3
+AOPower:2
+Exposure:0
+SunTurbidity:2
+SunSamples:16
+SkySamples:-256
+SunSamplesI:1024
+SkySamplesI:0
+MaxLights:1000
+MappingMode:0
+BackgroundSelection:3
+ReflectiondSelection:0
+HDRSamples:10
+HDRSamplesI:16
+HDRScale:0.6
+HDRRotation:0
+HDRName:C:\\Users\\dawid\\Documents\\UWr\\IIUWr\\SketchUp\\Lista8\\w
++ooden_lounge_8k.hdr
+ABack:0
+ALightD:0
+ALightI:0
+AHdrD:0
+AHdrI:0
+ASunD:1.83
+ASunI:-2.1
+ACaustics:0
+FPS:1
+IterationLimit:32
+HDR:0
+Antialiasing:0
+FixFaces:1
