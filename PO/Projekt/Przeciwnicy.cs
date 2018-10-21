@@ -6,12 +6,13 @@ namespace Projekt
 
     public class Przeciwnicy : Komnata
     {
-        private readonly int _maxHp;
-        public int Hp;
-        public readonly int Att;
-        public readonly int Arm;
-        public readonly int Exp;
+        private readonly int _maxHp; // maksymalne życie przeciwnika 
+        public int Hp; // aktualne życie przeciwnika 
+        public readonly int Att; // siła ataku przeciwnika
+        public readonly int Arm; // moc obrony przeciwnika 
+        public readonly int Exp; // ilość doświadczenia jaką zdobędzie gracz za pokonanie tego przeciwnika 
 
+        // baza przeciwników 
         public Przeciwnicy(int max, Random rnd)
         {
             var szansa = rnd.Next(1, max + 1);
@@ -176,6 +177,7 @@ namespace Projekt
             }
         }
 
+        // wyświetlanie informacji o przeciwniku
         public void Status()
         {
             Console.WriteLine(Nazwa);
@@ -186,6 +188,7 @@ namespace Projekt
             Console.WriteLine("Exp: " + Exp + "\n");
         }
 
+        // utrata zdrowia przeciwnika w zależności od siły ataku gracza 
         public void PlayerAttack(Postac gracz)
         {
             var dmg = gracz.Att - Arm;
@@ -193,6 +196,7 @@ namespace Projekt
             Hp -= dmg;
         }
 
+        // określenie z jaką siłą uderzy nas przeciwnik
         public int OpponentDmg(Postac gracz)
         {
             var dmg = Att - gracz.Arm;

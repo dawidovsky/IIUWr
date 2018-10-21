@@ -7,10 +7,10 @@ namespace Projekt
         public readonly string Co;
         public readonly int Wplyw;
         
+        // baza wydarzeń i losowanie jednego z nich
         public Wydarzenie(Random rnd)
         {
             var szansa = rnd.Next(1, 7);
-            Console.WriteLine("Losowość wyniosła " + szansa);
             switch (szansa)
             {
                 case 1:
@@ -55,6 +55,7 @@ namespace Projekt
             }
         }
         
+        // wyświetlanie informacji o wydarzeniu 
         public void Wyswietl()
         {
             Console.WriteLine(Nazwa);

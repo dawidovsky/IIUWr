@@ -325,6 +325,7 @@ namespace Projekt
         
         public void Wyswietl()
         {
+            Console.WriteLine("Widzisz przed sobą:");
             Console.WriteLine(Nazwa);
             Console.WriteLine(Opis);
             Console.WriteLine("MaxHp: " + Hp);

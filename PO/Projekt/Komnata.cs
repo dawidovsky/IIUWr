@@ -8,6 +8,7 @@ namespace Projekt
         protected string Opis;
         protected string Nazwa;
 
+        // konstruktor losujący komnatę 
         public Komnata(Random rnd)
         {
             var szansa = rnd.Next(1, 20);
@@ -20,7 +21,7 @@ namespace Projekt
             else
                 Typ = 3;
         }
-
+        // konstruktor bezparametrowy tworzący pustą komnatę 
         protected Komnata()
         {
             Typ = 5;

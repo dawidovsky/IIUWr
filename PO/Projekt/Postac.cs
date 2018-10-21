@@ -5,16 +5,16 @@ namespace Projekt
 {
     public class Postac
     {
-        private readonly int[] _levels = {10, 20, 40, 60, 100, 160};
-        private int _maxHp;
-        private int _hp;
-        public int Att;
-        public int Arm;
-        private int _exp;
-        public int Lvl;
-        private readonly List<Przedmioty> _wyposazenie;
-        private int _eliksiry;
-        public int Klucze;
+        private readonly int[] _levels = {10, 20, 40, 60, 100, 160}; // ilość doświadczenia na poziom
+        private int _maxHp; // maksymalne życie 
+        private int _hp; // aktualne życie 
+        public int Att; // siła ataku 
+        public int Arm; // moc obrony 
+        private int _exp; // doświadczenie 
+        public int Lvl; // poziom 
+        private readonly List<Przedmioty> _wyposazenie; // wyposażenie
+        private int _eliksiry; // ilość eliksirów 
+        public int Klucze; // ilość kluczy 
 
         public Postac()
         {
@@ -28,6 +28,7 @@ namespace Projekt
             Klucze = 0;
         }
 
+        // wyświetlanie stanu gracza 
         public void Status()
         {
             Console.WriteLine("HP: " + _hp + "/" + _maxHp);
@@ -37,12 +38,14 @@ namespace Projekt
             Console.WriteLine("Lvl: " + Lvl + "\n");
         }
 
+        // zmiana maksymalnego życia gracza 
         public void MaxHpUpdate(int newMaxHp)
         {
             _maxHp += newMaxHp;
             HpUpdate(0);
         }
 
+        // zmiana punktów życia gracza
         public void HpUpdate(int newHp)
         {
             _hp += newHp;
@@ -50,26 +53,31 @@ namespace Projekt
                 _hp = _maxHp;
         }
 
+        // zmiana siły ataku gracza
         public void AttUpdate(int newAtt)
         {
             Att += newAtt;
         }
 
+        // zmiana mocy obrony gracza
         public void ArmUpdate(int newArm)
         {
             Arm += newArm;
         }
 
+        // zmiana punktów doświadczenia gracza 
         public void ExpUpdate(int newExp)
         {
             _exp += newExp;
         }
 
+        // zmiana ilości kluczy 
         public void KeysUpdate(int x)
         {
             Klucze += x;
         }
 
+        // obsługa zdobywania poziomu
         public void Leveling()
         {
             if (_exp < _levels[Lvl]) return;
@@ -79,6 +87,7 @@ namespace Projekt
             Console.WriteLine("Zdobywasz " + Lvl + " poziom");
         }
 
+        // sprawdzanie posiadanych przedmiotów
         public void CheckInventory()
         {
             foreach (var eq in _wyposazenie)
@@ -90,6 +99,7 @@ namespace Projekt
             Console.WriteLine("Ilość eliksirów: " + _eliksiry + "\n");
         }
 
+        // dodawanie i usuwanie przedmiotów z ekwipunku 
         public void ChangeInv(Przedmioty prz)
         {
             var isThere = false;
@@ -119,6 +129,7 @@ namespace Projekt
             TakingItem(prz);
         }
 
+        // zmiana statystyk gracza po wyrzuceniu przedmiotu
         private void DropingItem(Przedmioty prz)
         {
             MaxHpUpdate(-prz.Hp);
@@ -126,6 +137,7 @@ namespace Projekt
             ArmUpdate(-prz.Arm);
         }
 
+        // zmiana statystyk gracza po podniesieniu przedmiotu
         private void TakingItem(Przedmioty prz)
         {
             MaxHpUpdate(prz.Hp);
@@ -133,6 +145,7 @@ namespace Projekt
             ArmUpdate(prz.Arm);
         }
 
+        // określa jak mocno uderzymy przeciwnika
         public int PlayerDmg(Przeciwnicy prz)
         {
             var dmg = Att - prz.Arm;
@@ -140,6 +153,7 @@ namespace Projekt
             return dmg;
         }
 
+        // utrata zdrowia gracza zależna od siły przeciwnika
         public void OpponentAttack(Przeciwnicy prz)
         {
             var dmg = prz.Att - Arm;
@@ -147,11 +161,13 @@ namespace Projekt
             _hp -= dmg;
         }
         
+        // sprawdzenie czy gracz żyje
         public bool IsAlive()
         {
             return _hp > 0;
         }
 
+        // używanie eliksiru
         public void ElixirUsage()
         {
             if (_eliksiry > 0)
@@ -164,6 +180,7 @@ namespace Projekt
             Console.WriteLine("Nie posiadasz eliksirów zdrowia");
         }
 
+        // dodawanie eliksiru do inwentarza
         private void AddElixir()
         {
             _eliksiry++;

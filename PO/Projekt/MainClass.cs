@@ -2,18 +2,22 @@
 
 namespace Projekt
 {
+    // cała obsługa wyświetlanych komunikatów 
+    // głównie jest to sam tekst, który wyświetla się graczowi
     public class MainClass
     {
         public static void Main()
         {
             var gracz = new Postac();
             var rnd = new Random();
-            Console.WriteLine("Pojawiasz się w zapomnianym labiryncie.\n");
-            while (gracz.IsAlive())
+            Console.WriteLine("Pojawiasz się w zapomnianym labiryncie.");
+            Console.WriteLine("Wciśnij dowolny klawisz by przejść do pierwszej komnaty");
+            Console.Read();
+            while (gracz.IsAlive())  // gra działa dopóki gracz jest żywy
             {
                 var stan = "0";
                 var kom = new Komnata(rnd);
-                if (kom.Typ == 1)
+                if (kom.Typ == 1) // obsługa komnaty z przeciwnikiem 
                 {
                     Console.WriteLine("Nowy Przeciwnik");
                     var opp = new Przeciwnicy(gracz.Lvl, rnd);
@@ -62,8 +66,8 @@ namespace Projekt
                             if (decyzja == "1")
                             {
                                 gracz.HpUpdate(-100000);
-                                Console.Clear();
                             }
+                            Console.Clear();
                         }
                     }
                     if (gracz.IsAlive() && !flee)
@@ -76,20 +80,20 @@ namespace Projekt
                     kom.Typ = 5;
                 }
 
-                else if (kom.Typ == 2)
+                else if (kom.Typ == 2) // obsługa komnaty z przedmiotem 
                 {
                     Console.WriteLine("Coś leży na ziemi");
                     var prz = new Przedmioty(gracz.Lvl, rnd);
-                    prz.Wyswietl();
-                    while (stan != "1" && stan != "6")
+                    while (stan != "1" && stan != "5")
                     {
+                        if (!gracz.IsAlive()) break;
+                        prz.Wyswietl();
                         Console.WriteLine("\nWybierz co chcesz dalej zrobić");
                         Console.WriteLine("1.Iść do kolejnej komnaty");
                         Console.WriteLine("2.Sprawdzić swój stan");
                         Console.WriteLine("3.Sprawdzić swój ekwipunek");
-                        Console.WriteLine("4.Sprawdzic opis przedmiotu");
-                        Console.WriteLine("5.Podnieść i podmienić przedmioty");
-                        Console.WriteLine("6.Wyjdź z gry");
+                        Console.WriteLine("4.Podnieść i podmienić przedmioty");
+                        Console.WriteLine("5.Wyjdź z gry");
 
                         stan = Console.ReadLine();
                         Console.Clear();
@@ -98,14 +102,12 @@ namespace Projekt
                         else if (stan == "3")
                             gracz.CheckInventory();
                         else if (stan == "4")
-                            prz.Wyswietl();
-                        else if (stan == "5")
                         {
                             gracz.ChangeInv(prz);
                             kom.Typ = 5;
                             break;
                         }
-                        else if (stan == "6")
+                        else if (stan == "5")
                         {
                             Console.WriteLine("Czy na pewno chcesz wyjsć?");
                             Console.WriteLine("1.Tak");
@@ -117,12 +119,15 @@ namespace Projekt
                                 Console.Clear();
                             }
                             else
+                            {
                                 stan = "0";
+                                Console.Clear();
+                            }
                         }
                     }
                 }
 
-                else if (kom.Typ == 3)
+                else if (kom.Typ == 3) // obsługa komnaty z wydarzeniem
                 {
                     Console.WriteLine("Coś się dzieje");
                     var wd = new Wydarzenie(rnd);
@@ -174,12 +179,15 @@ namespace Projekt
                                 Console.Clear();
                             }
                             else
+                            {
                                 stan = "0";
+                                Console.Clear();
+                            } 
                         }
                     }
                 }
 
-                else if (kom.Typ == 4)
+                else if (kom.Typ == 4) // obsługa komnaty ze skrzynią 
                 {
                     Console.Write("Na środku pomieszczenia stoi piękna skrzynia");
                     var skr = new Skrzynia(gracz.Lvl, rnd);
@@ -240,7 +248,10 @@ namespace Projekt
                                     Console.Clear();
                                 }
                                 else
+                                {
                                     stan = "0";
+                                    Console.Clear();
+                                }
                             }
                         }
                         else
@@ -280,7 +291,10 @@ namespace Projekt
                                     Console.Clear();
                                 }
                                 else
+                                {
                                     stan = "0";
+                                    Console.Clear();
+                                }
                             }
                         }
                     }
@@ -288,7 +302,7 @@ namespace Projekt
                         kom.Typ = 5;
                 }
 
-                if (kom.Typ == 5)
+                if (kom.Typ == 5) // obsługa pustej komnaty
                 {
                     stan = "0";
                     while (stan != "1" && stan != "5")
@@ -321,12 +335,15 @@ namespace Projekt
                                 Console.Clear();
                             }
                             else
+                            {
                                 stan = "0";
+                                Console.Clear();
+                            }
                         }
                     }
                 }
             }
-            Console.WriteLine("Nie żyjesz");
+            Console.WriteLine("Nie żyjesz"); // śmierć gracza - komunikat 
             Console.Read();
         }
     }
