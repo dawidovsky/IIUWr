@@ -13,3 +13,10 @@
 - Kurs języka C++ (wyk. Paweł Rzechonek prac: Paweł Rzechonek)
 - Programowanie Obiekowe (wyk: Marcin Młotkowski prac: Zdzisław Płoski)
 - Kurs modelowania 3d i wizualizacji w programie SketchUp 2018 (wyk: Łukasz Piwowar prac: Łukasz Piwowar)
+
+## Semestr 3
+- Analiza Numeryczna (L) (wyk: Paweł Woźny, ćw: Witold Karczewski)
+- Matematyka dyskretna (M) (wyk: Grzegorz Stachowiak, ćw: Mateusz Wasylkiewicz)
+- Kurs tworzenia gier w silniku Unity3D (wyk: Łukasz Piwowar, ćw: Łukasz Piwowar)
+- Kurs WWW (wyk: Paweł Rajba, ćw: Adam Kaczmarek)
+- Kurs: zaawansowane techniki w C++ i STL (wyk: Paweł Rzechonek, ćw: Marek Szykuła)
