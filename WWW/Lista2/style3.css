@@ -1,0 +1,29 @@
+/* Type */
+p {
+	color:red;
+} 
+
+/* Descendant */
+p span {
+	color:green;
+}
+
+/* Child */
+div > p {
+	color:blue;
+}
+
+/* Adjacent */
+h1 + h2 {
+	color: gray;
+}
+
+/* ID */
+#H1id {
+	color:lime;
+}
+
+/* Class */
+.spanclass {
+	color: saddlebrown;
+}

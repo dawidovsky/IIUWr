@@ -1,0 +1,54 @@
+.one {
+	background-color: blue;
+	flex-shrink:3;
+}
+
+.two {
+	background-color: red;
+	flex-grow:2;
+	font-size:50px;
+	color:white;
+	text-align: center;
+}
+
+.three {
+	background-color: green;
+	
+}
+
+.dv {
+	width:300px;
+	height:300px;	
+}
+
+.one1 {
+	background-color: blue;
+	flex-shrink:5;
+	font-size:30px;
+	color:white;
+	text-align: center;
+}
+
+.two1 {
+	background-color: red;
+}
+
+.three1 {
+	background-color: green;
+}
+
+.one2 {
+	background-color: blue;
+}
+
+.two2 {
+	background-color: red;
+}
+
+.three2 {
+	background-color: green;
+	flex-basis:100px;
+	font-size:30px;
+	color:white;
+	text-align: center;
+}

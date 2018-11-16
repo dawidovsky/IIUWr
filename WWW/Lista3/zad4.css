@@ -1,0 +1,45 @@
+.menu {
+	height:150px; 
+	background-color:green;
+}
+
+.shop {
+	margin:25px;
+}
+
+img {
+	width:270px;
+	height:250px;
+	position:absolute;
+}
+
+.rightmenu {
+	background-color:red;
+	width:200px;
+	height:620px;
+	position:absolute;
+	right:8px;
+	top:158px;
+}
+
+#two {
+	left:400px;
+}
+
+#three {
+	left:800px;
+}
+
+#four {
+	top:500px;
+}
+
+#five { 
+	top:500px;
+	left:400px;
+}
+
+#six {
+	top:500px;
+	left:800px;
+}

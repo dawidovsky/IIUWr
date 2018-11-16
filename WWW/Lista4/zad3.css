@@ -1,0 +1,31 @@
+#game{
+	height:88vh;
+	display:flex;
+	flex-direction:column;
+	justify-content:center;
+}
+
+#start{
+	width: 25vw;
+	height: 25vw;
+	margin: auto;
+	background-color: green;
+}
+
+#timer{
+	height:5vh;
+	font-size: 40px;
+	text-align: center;
+}
+
+.squ {
+	width:6vw;
+	height:6vw;
+	position: absolute;
+} 
+
+button {
+	position:absolute;
+	left:48%;
+	top:10px;
+}

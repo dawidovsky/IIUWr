@@ -1,0 +1,15 @@
+div {
+	width: 300px;
+	height: 300px; 
+	margin:1px;
+}
+
+.one {
+	background-color: red;
+	float:left;
+}
+
+.two {
+	background-color: blue;
+	float:right;
+}

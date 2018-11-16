@@ -1,0 +1,8 @@
+/* */
+#mydiv:after{
+	content: "Some text added by after";
+}
+
+#mydiv:before{
+	content: "This text gonna load faster (by before)";
+}

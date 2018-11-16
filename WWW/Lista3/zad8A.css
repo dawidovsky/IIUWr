@@ -1,0 +1,32 @@
+.main {
+	display: flex;
+}
+
+.logo {
+	background-color: lightblue;
+	flex-basis: 100px;
+	height: 100px;
+}
+
+.header {
+	background-color: cornflowerblue;
+	height: 100px;
+	flex-grow:2;
+}
+
+.menu {
+	background-color: orange;
+	flex-basis: 100px;
+	height:500px;
+}
+
+.content {
+	background-color: lightgoldenrodyellow;
+	flex-grow:2;
+}
+
+.footer {
+	background-color: palegreen;
+	height:100px;
+	flex-grow:2;
+}
