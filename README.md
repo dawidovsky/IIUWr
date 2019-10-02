@@ -27,3 +27,10 @@
 - Logika cyfrowa (wyk: Marek Materzok, ćw: Marek Materzok)
 - O ekonomii i gospodarce inaczej (wyk: Witold Kwaśnicki, ćw: Arkadiusz Sieroń)
 - Testowanie oprogramowania (wyk: Leszek Grocholski, ćw: Leszek Grocholski)
+
+## Semestr 5
+- Kurs języka Rust (wyk: Łukasz Piwowar, ćw: Łukasz Piwowar)
+- Wiedza przydatna w pierwszej pracy (Q1)
+- Kurs rozszerzony języka Python (wyk: Marcin Młotkowski, ćw: Marcin Młotkowski)
+- Komunikacja człowiek-komputer (wyk: Zdzisław Płoski, ćw: Leszek Grocholski)
+- Inżynieria oprogramowania (wyk: Leszek Grocholski, ćw: Leszek Grocholski)
