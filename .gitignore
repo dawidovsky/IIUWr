@@ -9,3 +9,5 @@
 *.jpg
 *.skb
 *.tiff
+target/
+*.lock
