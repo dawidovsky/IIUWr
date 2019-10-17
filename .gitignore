@@ -11,3 +11,4 @@
 *.tiff
 target/
 *.lock
+*.toml
