@@ -1,5 +1,8 @@
 use crate::Dot;
 
+extern crate console_error_panic_hook;
+use std::panic;
+
 use rand::prelude::*;
 
 pub struct Population{
@@ -14,6 +17,7 @@ pub struct Population{
 
 impl Population{
     pub fn new(size: usize, goalX: u32, goalY: u32) -> Population {
+        panic::set_hook(Box::new(console_error_panic_hook::hook));
         let mut dots = Vec::<Dot::Dot>::new();
         let fitnessSum = 0.0;
         let gen = 1;

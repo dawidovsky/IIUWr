@@ -1,5 +1,8 @@
 use crate::Brain;
 
+extern crate console_error_panic_hook;
+use std::panic;
+
 pub struct Dot{
     positionX: u32,
     positionY: u32,
@@ -13,6 +16,7 @@ pub struct Dot{
 impl Dot {
 
     pub fn new() -> Dot {
+        panic::set_hook(Box::new(console_error_panic_hook::hook));
         let positionX = 64;
         let positionY = 42;
         let brain = Brain::Brain::new(1000);

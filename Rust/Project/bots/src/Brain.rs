@@ -1,10 +1,14 @@
-use rand::prelude::*;
+
+extern crate stdweb;
+extern crate console_error_panic_hook;
+use self::stdweb::js;
+use std::panic;
 
 pub struct Brain{
     directions: Vec<u8>,
     step: usize,
 }
-
+// js!(js random) WebAssembly random
 impl Brain {
 
     pub fn getSteps(&self) -> usize {
@@ -16,12 +20,17 @@ impl Brain {
     }
 
     pub fn new(size: usize) -> Brain {
+        panic::set_hook(Box::new(console_error_panic_hook::hook));
         let mut directions: Vec<u8> = vec![];
         let step = 0;
-        let mut rng = thread_rng();
+        let mut rng = js!{
+            Math.floor(Math::random(10));
+        };
 
         for _ in 0..size {
-            let random = rng.gen_range(0, 9);
+            let random = js!{
+                Math.floor(Math::random(10));
+            };
             directions.push(random);
         }
 
@@ -39,10 +48,11 @@ impl Brain {
 
     pub fn mutate(&mut self) -> () {
         let mutationRate: f32 = 0.01;
-        let mut rng = rand::thread_rng();
 
         for i in 0..self.directions.len() {
-            let random = rng.gen_range(0.0, 1.0);
+            let random = js!{
+                Math.floor(Math::random(10));
+            };
             if random < mutationRate {
                 let randomDir = rng.gen_range(0, 9);
                 self.directions[i] = randomDir;

@@ -1,9 +1,9 @@
 mod Population;
 mod Dot;
 mod Brain;
+mod utils;
 
 extern crate wasm_bindgen;
-extern crate rand;
 
 use wasm_bindgen::prelude::*;
 use std::fmt;
