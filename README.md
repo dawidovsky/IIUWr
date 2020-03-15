@@ -34,3 +34,11 @@
 - Kurs rozszerzony języka Python (wyk: Marcin Młotkowski, ćw: Marcin Młotkowski)
 - Komunikacja człowiek-komputer (wyk: Zdzisław Płoski, ćw: Leszek Grocholski)
 - Inżynieria oprogramowania (wyk: Leszek Grocholski, ćw: Leszek Grocholski)
+
+
+## Semestr 6
+- Systemy Komputerowe (wyk: Piotr Witkowski, ćw: Piotr Witkowski)
+- Sieci Komputerowe (wyk: Marcin Bieńkowski, ćw: Tomasz Wierzbicki)
+- Bazy Danych (wyk: Piotr Wieczorek, ćw: Piotr Wieczorek)
+- Seminarium: Testowanie Oprogramowania (wyk: Leszek Grocholski)
+- Testowanie Gier (wyk: Leszek Grocholski, ćw: Leszek Grocholski)
