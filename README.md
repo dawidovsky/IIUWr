@@ -42,3 +42,8 @@
 - Bazy Danych (wyk: Piotr Wieczorek, ćw: Piotr Wieczorek)
 - Seminarium: Testowanie Oprogramowania (wyk: Leszek Grocholski)
 - Testowanie Gier (wyk: Leszek Grocholski, ćw: Leszek Grocholski)
+
+## Semestr 7
+- Praca dyplomowa (promotor: Jakub Kowalski)
+- Scala in Practice (wyk: Michał Kowalczykiewicz, ćw: Michał Kowalczykiewicz)
+- Wybrane elementy praktyki projektowania oprogramowania (wyk: Wiktor Zychla, ćw: Wiktor Zychla)
