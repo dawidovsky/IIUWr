@@ -12,3 +12,4 @@
 target/
 *.lock
 *.toml
+*.code-workspace
